@@ -42,8 +42,7 @@
 
 
 	<!-- 扫描ScoreManage下面所有包 -->
-	<context:component-scan base-package="ScoreManage" />
-	<context:component-scan base-package="ScoreManage" />
+	<context:component-scan base-package="studyPlan" />
 
 	<!-- 设置确省处理器，支持访问静态内容(html,css.js) -->
 	<mvc:default-servlet-handler />

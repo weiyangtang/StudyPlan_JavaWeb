@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>index</title>
+<script src="js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+	function submitform() {
+
+		$.ajax({
+			type : 'get',
+			url : 'StudentInfo',
+			async : true,
+			success : function(result) {
+				var student = result;
+				alert(student[0].studentName)
+				//alert(result);
+
+			},
+			error : function() {
+				alert('ERROR!');
+			}
+		});
+	}
+	function submitform2() {
+		//非常要小心的一点是,json对象的名称要和Bean对象的一致,特别是大小写,否则会报HTTP400错误
+		var StudentInfo = new Object();
+		StudentInfo.studentNo='1663710324';
+		var jsonStr = JSON.stringify(StudentInfo);
+		$.ajax({
+			type : 'post',
+			url : 'Student',
+			data : jsonStr,
+			contentType : "application/json; charset=utf-8",
+			dataType : "json",
+			async : true,
+			success : function(result) {
+				var student = result;
+				alert(student.studentName)
+
+			},
+			error : function() {
+				alert('ERROR!');
+			}
+		});
+	}
+</script>
+</head>
+<body>
+	<p>
+		<a href="http://localhost:8080/SpringDemo">首页index</a>
+	</p>
+	<button type="button" onclick="submitform()">测试Controller</button>
+	<button type="button" onclick="submitform2()">测试Controller</button>
+</body>
+</html>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
-  <display-name>SpringDemo</display-name>
+  <display-name>studyPlan</display-name>
   
   <!-- 第一个Servlet，拦截所有请求 -->
 	<servlet>
-		<servlet-name>SpringDemo</servlet-name>
+		<servlet-name>studyPlan</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
@@ -20,7 +20,7 @@
 	
 	<!-- Servlet SpringDemo处理所有用户请求 -->
 	<servlet-mapping>
-		<servlet-name>SpringDemo</servlet-name>
+		<servlet-name>studyPlan</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	
@@ -61,7 +61,7 @@
 	<!-- 根目录 -->
 	<context-param>
         <param-name>webAppRootKey</param-name>
-        <param-value>SpringDemo.root</param-value>
+        <param-value>studyPlan.root</param-value>
     </context-param>
 	
 </web-app>

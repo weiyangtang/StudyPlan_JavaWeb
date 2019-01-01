@@ -1,0 +1,127 @@
+
+/*登录界面的css*/
+body{
+	background:url("../images/bg.png") repeat ;
+	font-family: 'Open Sans', 'sans-serif';
+	width:100%;
+	margin:0 auto;
+	padding:0 auto;
+}
+.register{
+	
+	background:#1F5B9A;
+	width:30%;
+	margin:40px 20% 10px 50%;
+	padding:10px 10px;
+
+}
+/* 最顶端的标题 */
+.header_tiltle{
+	  color:#fff;
+	  text-align: center;
+	  padding: 10px 0;
+	  font-size: 40px;
+}
+#msform{
+	width:100%;
+	margin:20px auto;
+	padding:0px;
+	text-align:center;
+}
+.message{
+	text-align:left;
+	margin-left:90px;
+	color:#fff;
+}
+body h1 {
+	  color:#fff;
+	  text-align: center;
+	  padding: 10px 0;
+	  font-size: 40px;
+}
+
+/* 登录账户信息表格 */
+.login_form {
+	/* class 标签的样式要有. */
+	width:90%;
+    margin:20px auto;
+    text-align: center;
+    background: #323542;/*黑色*/
+    padding:60px,10%;
+}
+.login_form h2{
+  color:#fff;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
+}
+.login_form form{
+	width:100%;
+	color:#fff;/*白色*/
+	font-family:华文楷体;
+	font-size:20px;
+}
+.login_form form .id{
+	width:100%;
+	margin:10px 0;
+	padding:0,10%;
+	
+}
+input[type="text"],input[type="password"]{
+  width: 60%;
+  padding: 12px 15px 12px 15px;
+  color: #858282;
+  font-size: 17px;
+  font-style:bold;
+  outline: none;
+  background: #fff;
+  font-weight: 100;
+  border: none;
+  font-family: 华文楷体, sans-serif;
+  border-radius: 0.3em;
+  margin:20px 0;
+}
+.button{
+	  margin:20px 10px;
+	  font-size: 20px;
+	  color: #fff;
+	  cursor: pointer;
+	  outline: none;
+	  padding: 12px 10px;
+	  width:30%;
+	  background: #0bd38a;/*蓝色*/
+	  border:3px solid #0bd38a;
+	  border-radius: 0.3em;
+	  -webkit-border-radius: 0.3em;
+	  -moz-border-radius: 0.3em;
+}
+.button:hover{
+  background:none;
+  border: 3px solid #0bd38a;
+  color: #0bd38a;
+
+}
+.forget_password{
+	margin:20px 60px;
+	padding:10px 10px 30px 10px;
+	text-align:right;
+	font:楷体 bold 18px/20px arial,sans-serif;
+	cursor: pointer;
+}
+.forget_password:hover{
+	color:#0bd38a;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

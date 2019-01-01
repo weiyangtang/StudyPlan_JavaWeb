@@ -1,0 +1,529 @@
+body {
+		margin: 0;
+		padding: 0;
+		/* background-color:#BBFFEE; */
+		background-color: white;
+		font-family: 宋体;
+		font-size: 20px;
+		color: black;
+	}
+
+	#container {
+		margin: 0px auto;
+		padding: 0px;
+		width: 80%;
+		/* height:800 px; */
+		text-align: center;
+		/* background-color:#123456; */
+	}
+
+	#banner {
+		margin: 0px;
+		padding: 0px;
+		width: 100%;
+		height: 130px;
+		text-align: left;
+		background-image: url("../images/banner.png");
+		background-size: 100% 100%;
+		/* 设置背景图片的大小 */
+	}
+
+	#banner marquee {
+		font-family: 楷体;
+		font-size: 20px;
+		color: #00ff00;
+	}
+	#banner img {
+		position: relative;
+		left: 10%;
+		top: 0px;
+		width:130px;
+		height: 130px;
+		/* text-align: right; */
+	}
+	#banner .button {
+		position: absolute;
+		right: 10%;
+		top: 100px;
+		text-align: right;
+
+	}
+
+	#banner .button a {
+		text-decoration: none;
+	}
+
+	#banner .button a:hover {
+		color: red;
+
+	}
+
+
+	#globallink {
+		margin: 0px;
+		padding: 0px;
+	}
+
+	#globallink ul {
+		list-style-type: none;
+		margin: 0px;
+		padding: 0px;
+		width: 100%;
+		height: 50px;
+		background-color: #00A2CA;
+	}
+
+	#globallink ul li {
+		text-align: center;
+
+		display: inline;
+		/*让块级标签变成行级标签,然后再用text-align:center;才能无序列表标签居中*/
+		line-height: 50px;
+		font-family: "楷体";
+		font-size: 23px;
+		< !--
+		/* 删去padding:0 20px;  */
+		-->
+	}
+
+	#globallink ul li a {
+		margin: 0;
+		padding: 20px;
+		text-decoration: none;
+		display: inline-block;
+		/*将<a>标签变成块级标签,并排列在一行*/
+		padding: 0 50px;
+		/*内边距填充*/
+		/*margin:0 20px;外边距:上下 右左*/
+
+	}
+
+	#globallink ul li a:hover {
+		background-color: #0095BB;
+		/*暗色*/
+	}
+
+	#photo {
+		margin: 5px auto;
+		padding: 0px;
+		width: 100%;
+		height: 400px;
+		text-align: left;
+		/* background-color:#aabbcc;	 */
+	}
+
+	#news {
+		margin: 0px;
+		padding: 0px;
+		width: 100%;
+		height: 410px;
+		text-align: left;
+		background-color: white;
+	}
+
+	#news .top1 {
+		width: 75%;
+		height: 30px;
+		padding: 10px 0 0 0;
+		text-align: left;
+		margin: 0 10px;
+		color: #D04449;
+		font-family: 微软雅黑;
+		font-size: 18px;
+		font-weight: bold;
+		border-bottom-color: #888888;
+		border-bottom-width: 2px;
+		border-bottom-style: solid;
+		/* 边框时必须注明边框的类型 solid 实线 dotted 点状线 double 双线 dashed虚线*/
+		float: left;
+	}
+
+	#news .top2 {
+		width: 20%;
+		height: 30px;
+		margin: 0 10px;
+		padding: 12px 0 0 0;
+		float: left;
+	}
+
+	#news .top2 table {
+		width: 200px;
+		height: 30px;
+		/* padding:10px 20px 0 20px;  */
+
+	}
+
+	#news .top2 td {
+		text-align: center;
+		color: #3EA64E;
+		font-family: 微软雅黑;
+		font-size: 18px;
+		font-weight: bold;
+		border-bottom-color: #888888;
+		border-bottom-width: 2px;
+		border-bottom-style: solid;
+		/* 边框时必须注明边框的类型 solid 实线 dotted 点状线 double 双线 dashed虚线*/
+
+	}
+
+	#news .left {
+		text-align: left;
+		font-family: 宋体;
+		font-size: 15px;
+		margin: 0;
+		padding: 5px 0;
+		width: 350px;
+		height: 350px;
+		float: left;
+		/* 这个很重要 ,使得left 和middle在同一行上*/
+
+	}
+
+	#news .left ul {
+		list-style-type: none;
+		margin: 0;
+		padding: 5px 0;
+
+	}
+
+	#news .left ul li {
+		margin: 0 0 3px 0;
+		font-family: 微软雅黑;
+		font-size: 13px;
+		padding: 1px 0;
+	}
+
+	#news .left ul li img {
+		margin: 5px 2px;
+		width: 350px;
+		height: 250px;
+	}
+
+	#news .left ul li a {
+		text-decoration: none;
+		color: #444444;
+	}
+
+	#news .left ul li a:hover {
+		color: #cc0000;
+	}
+
+	#news .middle {
+
+		margin: 0px 10px;
+		padding: 5px;
+		width: 550px;
+		height: 350px;
+		float: left;
+		/* 这个很重要 ,使得left 和middle在同一行上*/
+	}
+
+	#news .middle table {
+		width: 100%;
+		height: 350px;
+
+	}
+
+	#news .middle table td {
+		border-bottom: 1px dotted black;
+		font-family: 微软雅黑;
+		font-size: 15px;
+
+	}
+
+	#news .middle table td img {
+		margin: 0 5px;
+	}
+
+	#news .middle table td a {
+		text-decoration: none;
+		color: #444444;
+	}
+
+	#news .middle table td a:hover {
+		color: #0078BF;
+	}
+
+	#news .right {
+
+		margin: 0px 10px;
+		padding: 5px;
+		width: 20%;
+		height: 350px;
+		float: left;
+		/* 这个很重要 ,使得left 和middle在同一行上*/
+
+	}
+
+	#news .right table {
+		width: 200px;
+		margin: 0;
+		padding: 0;
+		text-align: center;
+		/* 表格内对齐方式由标签table决定 */
+		/* border:2px black; */
+
+	}
+
+	#news .right table td {
+
+		/* color:#363636;
+		font-family:微软雅黑;
+		font-size:13px;  对超链接的字体的设置还是要在<a>中设置有效
+		*/
+		padding: 5px 0;
+
+	}
+
+	#news .right table td a {
+		text-decoration: none;
+		color: #363636;
+		font-family: 微软雅黑;
+		font-size: 13px;
+	}
+
+	#news .right table td a:hover {
+		color: red;
+	}
+
+
+
+
+	#news .middle ul li {
+		margin: 20px 0;
+		padding: 0 20px 0 0;
+		/* display:block; */
+		width: 600px;
+	}
+
+	#news .middle ul li a {
+		text-decoration: none;
+		padding: 20px 20px 0px 0px;
+		margin: 20px 0;
+		text-align: left;
+		font-family: 微软雅黑;
+		font-size: 15px;
+		color: black;
+		border-bottom: solid 2px #DDDDDD;
+	}
+
+	#news .middle ul li a:hover {
+		color: #EEEE00;
+	}
+
+
+	#note {
+		margin: 10px 10px;
+		padding: 0px;
+		width: 100%;
+		height: 300px;
+
+	}
+
+	#note .left {
+		/* text-align:left;
+		font-family:宋体;
+		font-size:15px; */
+		margin: 0px 15px 0 5px;
+		padding: 5px 0;
+		width: 30%;
+		height: 300px;
+
+		float: left;
+		/* 这个很重要 ,使得left 和middle在同一行上*/
+
+	}
+
+	#note .left table {
+		width: 100%;
+		margin: 0;
+		padding: 0;
+	}
+
+	#note .left table td {
+		height: 30px;
+
+	}
+
+	#note .left table td a {
+		text-decoration: none;
+		/* 消除超链接的下划线要在<a>标签上text-decoration:none; */
+		font-family: 微软雅黑;
+		font-size: 14px;
+		text-align: left;
+		color: black;
+		/* 有超链接的地方,文字样式在<a>标签中定义 */
+	}
+
+	#note .left table td a:hover {
+
+		color: red;
+		/* 有超链接的地方,文字样式在<a>标签中定义 */
+	}
+
+	#note .middle {
+		margin: 0px 5px;
+		padding: 5px 0;
+		width: 32%;
+		height: 300px;
+
+		float: left;
+		/* 这个很重要 ,使得left 和middle在同一行上*/
+	}
+
+	#note .middle table {
+		width: 100%;
+		margin: 0;
+		padding: 0;
+	}
+
+	#note .middle table td {
+		height: 30px;
+
+	}
+
+	#note .middle table td a {
+		text-decoration: none;
+		/* 消除超链接的下划线要在<a>标签上text-decoration:none; */
+		font-family: 微软雅黑;
+		font-size: 14px;
+		text-align: left;
+		color: black;
+		/* 有超链接的地方,文字样式在<a>标签中定义 */
+	}
+
+	#note .middle table td a:hover {
+
+		color: red;
+		/* 有超链接的地方,文字样式在<a>标签中定义 */
+	}
+
+	#note .right {
+
+		margin: 0 5px;
+		padding: 5px 0;
+		width: 32%;
+		height: 300px;
+
+		float: left;
+		/* 这个很重要 ,使得left 和middle在同一行上*/
+	}
+
+	#note .right table {
+		width: 100%;
+		margin: 0;
+		padding: 0;
+	}
+
+	#note .right table td {
+		height: 15px;
+	}
+
+
+	#note .right table td a {
+		text-decoration: none;
+		/* 消除超链接的下划线要在<a>标签上text-decoration:none; */
+		font-family: 微软雅黑;
+		font-size: 14px;
+		text-align: left;
+		color: black;
+		/* 有超链接的地方,文字样式在<a>标签中定义 */
+	}
+
+	.note {
+		text-decoration: none;
+		/* 消除超链接的下划线要在<a>标签上text-decoration:none; */
+		padding: 5px 0px;
+		font-family: 微软雅黑;
+		font-size: 18px;
+		text-align: left;
+		font-weight: bold;
+		color: gold;
+	}
+
+	#note .right table td a:hover {
+
+		color: red;
+		/* 有超链接的地方,文字样式在<a>标签中定义 */
+	}
+
+	#note .top1 {
+		width: 30%;
+		height: 25px;
+		margin: 0px 15px 0 5px;
+		padding: 5px 0;
+		text-align: left;
+		color: #6B66B6;
+		/* 紫色 */
+		background: white;
+		font-family: 微软雅黑;
+		font-size: 18px;
+		font-weight: bold;
+		float: left;
+		/*脱离了父类*/
+	}
+
+	#note .top2 {
+		width: 32%;
+		height: 25px;
+		margin: 0px 5px;
+		padding: 5px 0;
+		text-align: left;
+		color: #6B66B6;
+		background: white;
+		font-family: 微软雅黑;
+		font-size: 18px;
+		font-weight: bold;
+		float: left;
+		/*脱离了父类*/
+	}
+
+	#note .top3 {
+		width: 32%;
+		height: 25px;
+		margin: 0px 5px;
+		padding: 5px 0;
+		text-align: left;
+		color: #6B66B6;
+		background: white;
+		font-family: 微软雅黑;
+		font-size: 18px;
+		font-weight: bold;
+		float: left;
+		/*脱离了父类*/
+	}
+
+	#footer {
+		margin: 0px 0;
+		padding: 0px;
+		width: 100%;
+		height: 78px;
+		text-align: center;
+		background-image: url(images/footerbg.png);
+		background-repeat: repeat-x;
+		clear: both;
+		/* 这个很重要 */
+		/* background:#AAFFEE; */
+	}
+
+	#footer table {
+		margin: 0px 0;
+		padding: 0px;
+		width: 100%;
+		height: 100%;
+		/* background:#AAFFEE; */
+	}
+
+	#footer table td {
+		text-align: center;
+		color: black;
+
+	}
+
+	#footer table td a {
+		text-decoration: none;
+	}
+
+	#footer table td a:hover {
+		color
+	}

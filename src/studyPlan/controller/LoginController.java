@@ -1,0 +1,46 @@
+package studyPlan.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import studyPlan.model.Student;
+import studyPlan.service.StudentService;
+import studyPlan.service.LoginService;
+
+@Controller
+public class LoginController {
+
+	@Autowired
+	StudentService studentService = null;
+	@Autowired
+	LoginService loginService = null;
+
+	/* 返回登录界面 */
+	@RequestMapping(value = { "/login", "/", "/index" }, method = RequestMethod.GET)
+	public String login() {
+		System.out.println("/login is request!");// 测试
+
+		// 返回"login"视图，对应login.jsp
+		return "login";
+	}
+
+	/*
+	 * @功能:登录,校验身份密码
+	 * 
+	 * @返回方式:写入响应代码
+	 * 
+	 * @响应代码:0密码错误,1学生密码正确,2教师密码正确
+	 */
+	@RequestMapping(value = { "/login" }, method = RequestMethod.POST)
+	public @ResponseBody int login(@RequestParam String username, @RequestParam String password,
+			@RequestParam String identity) {
+		System.out.println(username + " " + password + " " + identity);// 测试
+		int flag = loginService.login(username, password, identity);
+		return flag;
+	}
+
+}

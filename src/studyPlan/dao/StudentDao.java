@@ -26,11 +26,28 @@ public class StudentDao {
 			return list.get(0);
 	}
 
-	/* 找出所有学生*/
+	/* 找出所有学生 */
 	public Student[] findAllStudent() {
 		String sql = "select * from student";
 		List<Student> list = jdbcTemplate.query(sql, mapper);
 		return list.toArray(new Student[0]);
+	}
+
+	/*
+	 * @功能: 添加学生
+	 * 
+	 * @返回值:0用户账号已存在,1注册成功
+	 * 
+	 * 
+	 */
+	public int addStudent(String studentNo, String studentName, String studentPassword) {
+		
+		String sql = "insert student(studentNo,studentName,studentPassword,coin) values(?,?,?,0)";
+		int flag = jdbcTemplate.update(sql, studentNo, studentName, studentPassword);
+		if (flag > 0)
+			return 1;
+		return 0;
+
 	}
 
 }

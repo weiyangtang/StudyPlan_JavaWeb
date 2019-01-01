@@ -18,7 +18,7 @@
 		</multipart-config>
 	</servlet>
 	
-	<!-- Servlet SpringDemo处理所有用户请求 -->
+	<!-- Servlet studyPlan处理所有用户请求 -->
 	<servlet-mapping>
 		<servlet-name>studyPlan</servlet-name>
 		<url-pattern>/</url-pattern>

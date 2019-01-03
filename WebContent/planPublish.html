@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>学习计划发布</title>
+		<script src="resources/jquery1.9.1/jquery-1.9.1.min.js" type="text/javascript"></script>
+		<link href="resources/bootstrap3.3.4/css/bootstrap.min.css" rel="stylesheet">
+		<script src="resources/bootstrap3.3.4/js/bootstrap.min.js" type="text/javascript"></script>
+		<script src="resources/layer/layer.js" type="text/javascript"></script>
+		<script src="resources/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+	</head>
+	<body>
+		<div class="container" style="display: none;" id="totalScore">
+			<table id="studentScoreTable"></table>
+		</div>
+		<div class="container">
+			<div class="row">
+				<form class="form-horizontal col-md-6" id="studentScore" method="post">
+					<fieldset id="">
+						<legend>制定发布学习计划</legend>
+					</fieldset>
+
+					<div class="form-group">
+						<label class="col-md-2 control-label">计划类型:</label>
+						<div class="col-md-4">
+							<select id="planType" class="form-control">
+								<option>高数</option>
+								<option>英语</option>
+								<option>计算机科学</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group ">
+						<label class="col-md-2 control-label">计划名称:</label>
+						<div class="col-md-4">
+							<input type="text" class="form-control required" name="planName" id="planName">
+						</div>
+					</div>
+					<div class="form-group ">
+						<label class="col-md-2 control-label">分值:</label>
+						<div class="col-md-4">
+							<input type="text" class="form-control required" name="credit" id="credit">
+						</div>
+					</div>
+					<div class="form-group ">
+						<label class="col-md-2 control-label">计划内容:</label>
+						<div class="col-md-6">
+							<textarea class="form-control" rows="5" id="planContent" name="planContent"></textarea>
+
+						</div>
+					</div>
+					<div class="form-group ">
+						<label class="col-md-2 control-label">文件上传:</label>
+						<div class="col-md-4">
+						  <input type="file" name="planFile" id="planFile" value="" />
+						</div>
+					</div>
+					<div class="form-group ">
+						<button type="type" onclick="submitForm" class="btn btn-primary pull-right">提交作业</button>
+					</div>
+				</form>
+			</div>
+	</body>
+	<script>
+		$(document).ready(function() {
+			$.ajax({
+				type: 'post',
+				url: 'PlanType',
+				async: false,
+				data: {},
+				success: function(result) {
+					alert(result[0].planTypeName);
+					var plan = result;
+					for (var i in plan)
+						$("#selectlink").append("<option value=" + i + ">" + plan[i].planTypeName + "</option>");
+
+				},
+				error: function() {
+					alert("error");
+				}
+			});
+		})
+
+		function submitForm() {
+			$("#planPublish").validate({
+				feedbackIcons: {
+					valid: 'glyphicon glyphicon-ok',
+					invalid: 'glyphicon glyphicon-remove',
+					validating: 'glyphicon glyphicon-refresh'
+				},
+				rules: {
+					planName: {
+						required: true,
+					},
+					credit: {
+						required: true,
+						number: true,
+						min: 0,
+						max: 10
+					},
+					planContent: {
+						required: true
+					}
+				},
+				messages: {
+					planName: {
+						required: "请输入计划名称"
+					},
+					credit: {
+						required: "请输入计划的总积分",
+						number: "总积分必须为数字",
+						min: "总积分不小于0",
+						max: "总积分不大于10"
+
+					},
+					planContent: {
+						required: "请输入计划内容"
+					}
+				},
+				submitHandler: function(form) {
+
+					/* 	var sno = $('#SNO').val();
+						var subject = $('input[name="subject"]:checked').val();
+						var score = $('#grade').val(); */
+
+					var form = new FormData(document.getElementById("planPublish"));
+					$.ajax({
+						type: 'post',
+						url: 'PlanPublish',
+						async: true,
+						data: form,
+						success: function(result) {
+							alert(result);
+						},
+						error: function() {
+							alert('ERROR!');
+						}
+					});
+				}
+			});
+		}
+	</script>
+</html>

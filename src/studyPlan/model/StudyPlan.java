@@ -14,6 +14,27 @@ public class StudyPlan {
 	 * @param coinNum
 	 * @param planContext
 	 * @param planInfoFile
+	 * @param teacherNo
+	 */
+	public StudyPlan(int planNo, String planTypeNo, String planName, float coinNum, String planContext,
+			String planInfoFile, String teacherNo) {
+		super();
+		this.planNo = planNo;
+		this.planTypeNo = planTypeNo;
+		this.planName = planName;
+		this.coinNum = coinNum;
+		this.planContext = planContext;
+		this.planInfoFile = planInfoFile;
+		this.teacherNo = teacherNo;
+	}
+
+	/**
+	 * @param planNo
+	 * @param planTypeNo
+	 * @param planName
+	 * @param coinNum
+	 * @param planContext
+	 * @param planInfoFile
 	 */
 	public StudyPlan(int planNo, String planTypeNo, String planName, float coinNum, String planContext,
 			String planInfoFile) {
@@ -32,6 +53,7 @@ public class StudyPlan {
 	private float coinNum;
 	private String planContext;
 	private String planInfoFile;
+	private String teacherNo;
 	
 	public int getPlanNo() {
 		return planNo;
@@ -68,6 +90,12 @@ public class StudyPlan {
 	}
 	public void setPlanInfoFile(String planInfoFile) {
 		this.planInfoFile = planInfoFile;
+	}
+	public String getTeacherNo() {
+		return teacherNo;
+	}
+	public void setTeacherNo(String teacherNo) {
+		this.teacherNo = teacherNo;
 	}
 	
 }

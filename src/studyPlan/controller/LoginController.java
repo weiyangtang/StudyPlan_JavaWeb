@@ -1,5 +1,7 @@
 package studyPlan.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,9 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import studyPlan.model.Student;
-import studyPlan.service.StudentService;
 import studyPlan.service.LoginService;
+import studyPlan.service.StudentService;
 
 @Controller
 public class LoginController {
@@ -36,11 +37,16 @@ public class LoginController {
 	 * @响应代码:0密码错误,1学生密码正确,2教师密码正确
 	 */
 	@RequestMapping(value = { "/login" }, method = RequestMethod.POST)
-	public @ResponseBody int login(@RequestParam String username, @RequestParam String password,
+	public @ResponseBody int login(HttpSession session,@RequestParam String username, @RequestParam String password,
 			@RequestParam String identity) {
 		System.out.println(username + " " + password + " " + identity);// 测试
 		int flag = loginService.login(username, password, identity);
+		if(flag==1)
+			session.setAttribute("studentNo", username);
+		else if(flag==2)
+			session.setAttribute("teacherNo", username);
 		return flag;
+		
 	}
 
 }

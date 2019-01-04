@@ -54,12 +54,30 @@ public class PersonalInfoController {
 	public @ResponseBody Student getStudentInfo(HttpSession session) {
 
 		System.out.println("学生端请求数据");
-		session.setAttribute("studentNo", "1605010203");// 测试,合并删除
+		// session.setAttribute("studentNo", "1605010203");// 测试,合并删除
 
 		String studentNo = (String) session.getAttribute("studentNo");
 		if (studentNo == null)
 			return null;
 		return studentService.findStudent(studentNo);
+	}
+
+	/**
+	 * @功能:修改学生的个人信息
+	 * @返回值:0修改失败,1修改成功
+	 * 
+	 */
+	@RequestMapping(value = { "/updateStudentInfo" }, method = RequestMethod.POST)
+	public @ResponseBody int updateStudentInfo(HttpSession session, @RequestParam String userNames,
+			@RequestParam String passwords, @RequestParam String majors, @RequestParam String sex) {
+		System.out.println(userNames + "\t" + passwords + "\t" + majors + "\t" + sex);
+
+		String studentNo = (String) session.getAttribute("studentNo");
+		if (studentNo == null)
+			return 0;
+		Student student = new Student(studentNo, userNames, passwords, majors, 0, sex, null);
+		System.out.println(studentService.updateStudentInfo(student));
+		return studentService.updateStudentInfo(student);
 	}
 
 	/*************************************************************/
@@ -89,7 +107,7 @@ public class PersonalInfoController {
 	public @ResponseBody Teacher getTeacherInfo(HttpSession session) {
 
 		System.out.println("教师端请求数据");
-		session.setAttribute("teacherNo", "1663710324");// 测试,合并删除
+		// session.setAttribute("teacherNo", "1663710324");// 测试,合并删除
 
 		String teacherNo = (String) session.getAttribute("teacherNo");
 		if (teacherNo == null)
@@ -99,32 +117,19 @@ public class PersonalInfoController {
 
 	/**
 	 * @功能:修改教师的个人信息
-	 * @返回值:返回教师个人信息的JSON格式
+	 * @返回值:0修改失败,1修改成功
 	 * 
 	 */
-	@RequestMapping(value = { "/updateTeacherInfoInfo" }, method = RequestMethod.POST)
-	public @ResponseBody String updateStudentInfo(HttpSession session, MultipartFile uploadFile) {
-		// ,@RequestParam String userNames, @RequestParam String passwords,
-		// @RequestParam String ResearchDirections,@RequestParam String
-		// titles,@RequestParam String sex
-		System.out.println("请求数据2");
-		session.setAttribute("teacherNo", "1663710324");// 测试,合并删除
+	@RequestMapping(value = { "/updateTeacherInfo" }, method = RequestMethod.POST)
+	public @ResponseBody int updateTeacherInfo(HttpSession session, @RequestParam String userNames,
+			@RequestParam String passwords, @RequestParam String ResearchDirections, @RequestParam String titles,
+			@RequestParam String sex) {
+		System.out.println(userNames + "\t" + passwords + "\t" + ResearchDirections + "\t" + titles + "\t" + sex);
 
 		String teacherNo = (String) session.getAttribute("teacherNo");
 		if (teacherNo == null)
-			return null;
-
-		String uploadPath = FilePathUtil.upload + File.separator + uploadFile.getOriginalFilename();
-		try {
-			FileOutputStream fs = new FileOutputStream(uploadPath);
-			fs.write(uploadFile.getBytes());
-			fs.close();
-			System.out.println(uploadPath);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		System.out.println("ok");
-		return "成功";
-
+			return 0;
+		Teacher teacher = new Teacher(teacherNo, userNames, passwords, sex, titles, ResearchDirections, null);
+		return teacherService.updateTeacherInfo(teacher);
 	}
 }

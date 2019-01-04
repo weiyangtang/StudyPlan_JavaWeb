@@ -20,4 +20,13 @@ public class TeacherService {
 		return dao.findAllTeacher();
 	}
 
+	/**
+	 * @功能:修改教师的个人信息
+	 * @返回值:0修改失败,1修改成功
+	 * 
+	 * 
+	 * */
+	public int updateTeacherInfo(Teacher teacher) {
+		return dao.updateTeacherInfo(teacher);
+	}
 }

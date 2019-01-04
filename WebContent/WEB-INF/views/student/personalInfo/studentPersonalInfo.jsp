@@ -115,7 +115,6 @@
 			contentType : false,
 			processData : false,
 			success : function(result) {
-				alert(result);
 				history.go(0);//清除浏览器缓存,刷新,请求后台
 
 			},

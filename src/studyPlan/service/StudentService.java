@@ -20,4 +20,15 @@ public class StudentService {
 	public Student[] findAllStudent() {
 		return dao.findAllStudent();
 	}
+
+	/**
+	 * 
+	 * @功能:修改学生个人信息
+	 * @返回值:0修改失败,1修改成功
+	 * 
+	 */
+	public int updateStudentInfo(Student student) {
+		return dao.updateStudentInfo(student);
+	}
+
 }

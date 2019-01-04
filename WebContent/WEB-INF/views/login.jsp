@@ -46,12 +46,12 @@
 					'identity' : identity
 				},
 				success : function(result) {
-					alert(result);
 					var option = parseInt(result);
 					if (option == 0)
 						alert("密码错误");
 					else
 						alert("密码正确");
+					
 				},
 				error : function() {
 					alert("error");

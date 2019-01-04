@@ -40,10 +40,10 @@
 				} else
 					$("#sex")[0].innerHTML = teacher.teacherSex;
 
-				if (teacher.ResearchDirection == null) {
+				if (teacher.researchDirection == null) {
 					$("#ResearchDirection")[0].innerHTML = "";
 				} else
-					$("#ResearchDirection")[0].innerHTML = teacher.ResearchDirection;
+					$("#ResearchDirection")[0].innerHTML = teacher.researchDirection;
 
 				if (teacher.title == null) {
 					$("#title")[0].innerHTML = "";
@@ -60,7 +60,7 @@
 						$("#userNames").val(teacher.teacherName);
 						$("#passwords").val(teacher.teacherPassword.trim());
 						$("#titles").val(teacher.title);
-						$("#ResearchDirections").val(teacher.ResearchDirection);
+						$("#ResearchDirections").val(teacher.researchDirection);
 
 						if (teacher.teacherSex.trim() == "女")
 							$("#female").attr("checked", true);//设置radio选中
@@ -99,15 +99,15 @@
 		var formData = new FormData(document.getElementById("updateForm"));
 		$.ajax({
 			type : 'post',
-			url : 'upload',
+			url : 'updateTeacherInfo',
 			async : false,
 			data : formData,
 			cache : false,
 			contentType : false,
 			processData : false,
 			success : function(result) {
-				alert(result);
-				//history.go(0);//清除浏览器缓存,刷新,请求后台
+				//alert(result);
+				history.go(0);//清除浏览器缓存,刷新,请求后台
 
 			},
 			error : function() {

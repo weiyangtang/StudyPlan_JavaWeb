@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import studyPlan.model.Student;
+import studyPlan.model.Teacher;
 
 @Repository
 public class StudentDao {
@@ -47,7 +48,20 @@ public class StudentDao {
 		if (flag > 0)
 			return 1;
 		return 0;
-
+	}
+	
+	/**
+	 * 
+	 * @功能:修改学生个人信息
+	 * @返回值:0修改失败,1修改成功
+	 * 
+	 * */
+	public int updateStudentInfo(Student student) {
+		String sql = "update student  set studentName=?,studentPassword=?,major=?,studentSex=? where studentNo=?";
+		int flag = jdbcTemplate.update(sql,student.getStudentName(),student.getStudentPassword(),student.getMajor(),student.getStudentSex(),student.getStudentNo());
+		if (flag > 0)
+			return 1;
+		return 0;
 	}
 
 }

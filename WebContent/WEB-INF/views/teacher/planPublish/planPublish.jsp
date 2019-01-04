@@ -64,12 +64,12 @@
 							name="planContent"></textarea>
 					</div>
 				</div>
-				<!-- <div class="form-group ">
+				<div class="form-group ">
 					<label class="col-md-2 control-label">文件上传:</label>
 					<div class="col-md-4">
 						<input type="file" name="planFile" id="planFile" value="" />
 					</div>
-				</div> -->
+			
 				<div class="form-group ">
 					<button type="button" onclick="submitForm()"
 						class="btn btn-primary pull-right">提交计划</button>

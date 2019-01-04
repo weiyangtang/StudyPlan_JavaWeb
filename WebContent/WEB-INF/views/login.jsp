@@ -46,12 +46,21 @@
 					'identity' : identity
 				},
 				success : function(result) {
+// 					alert(result);
 					var option = parseInt(result);
 					if (option == 0)
 						alert("密码错误");
-					else
-						alert("密码正确");
-					
+					else if(option == 1){
+						//学生
+						var url = "studentInfo";
+						window.location.href = url;
+// 						alert("密码正确");
+					}else{
+						var url = "teacherInfo";
+						window.location.href = url;
+						//老师
+					}
+
 				},
 				error : function() {
 					alert("error");

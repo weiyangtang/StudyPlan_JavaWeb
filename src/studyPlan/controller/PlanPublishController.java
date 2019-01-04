@@ -28,7 +28,7 @@ public class PlanPublishController {
 	@RequestMapping(value = { "/planPublish" }, method = RequestMethod.GET)
 	public String getPlanPublish(HttpSession session) {
 
-		session.setAttribute("teacherNo", "1605010203");// 测试,合并删除
+		//session.setAttribute("teacherNo", "1605010203");// 测试,合并删除
 
 		String teacherNo = (String) session.getAttribute("teacherNo");
 		if (teacherNo == null)
@@ -42,7 +42,7 @@ public class PlanPublishController {
 	@RequestMapping(value = { "/PlanType" }, method = RequestMethod.POST)
 	public @ResponseBody PlanType[] findAllPlanType(HttpSession session) {
 
-		session.setAttribute("teacherNo", "1605010203");// 测试,合并删除
+		//session.setAttribute("teacherNo", "1605010203");// 测试,合并删除
 
 		String teacherNo = (String) session.getAttribute("teacherNo");
 		if (teacherNo == null)
@@ -57,7 +57,7 @@ public class PlanPublishController {
 	@RequestMapping(value = { "/PlanPublish" }, method = RequestMethod.POST)
 	public @ResponseBody int PlanPublish(HttpSession session, StudyPlan plan) {
 		System.out.println("计划发布");
-		session.setAttribute("teacherNo", "1605010203");// 测试,合并删除
+		//session.setAttribute("teacherNo", "1605010203");// 测试,合并删除
 
 		String teacherNo = (String) session.getAttribute("teacherNo");
 		if (teacherNo == null)

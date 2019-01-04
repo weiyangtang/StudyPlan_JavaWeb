@@ -37,7 +37,7 @@ public class PersonalInfoController {
 	@RequestMapping(value = { "/studentInfo" }, method = RequestMethod.GET)
 	public String studentInfo(HttpSession session) {
 
-		session.setAttribute("studentNo", "1605010203");// 测试,合并删除
+		//session.setAttribute("studentNo", "1605010203");// 测试,合并删除
 
 		String studentNo = (String) session.getAttribute("studentNo");
 		if (studentNo == null)
@@ -90,7 +90,7 @@ public class PersonalInfoController {
 	@RequestMapping(value = { "/teacherInfo" }, method = RequestMethod.GET)
 	public String teacherInfo(HttpSession session) {
 
-		session.setAttribute("teacherNo", "1663710324");// 测试,合并删除
+		//session.setAttribute("teacherNo", "1663710324");// 测试,合并删除
 
 		String studentNo = (String) session.getAttribute("teacherNo");
 		if (studentNo == null)

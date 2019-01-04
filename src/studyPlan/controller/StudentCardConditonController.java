@@ -31,7 +31,7 @@ public class StudentCardConditonController {
 	@RequestMapping(value = { "/planList" }, method = RequestMethod.POST)
 	public @ResponseBody StudyPlan[] findAllPlanType(HttpSession session) {
 
-		session.setAttribute("teacherNo", "1605010203");// 测试,合并删除
+		//session.setAttribute("teacherNo", "1605010203");// 测试,合并删除
 
 		String teacherNo = (String) session.getAttribute("teacherNo");
 		if (teacherNo == null)

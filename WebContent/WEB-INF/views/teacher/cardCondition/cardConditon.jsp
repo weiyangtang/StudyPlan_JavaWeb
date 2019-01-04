@@ -163,7 +163,19 @@
 </script>
 </head>
 <body>
-
+  	<nav class="navbar-inverse visible-lg visible-md" role="navigation">
+		<div class="container">
+			<div class="navbar-header"> <a class="navbar-brand" href="#">学习计划打卡系统</a> </div>
+			<div>
+				<ul class="nav navbar-nav">
+					<li><a href="http://localhost:8080/studyPlan/planPublish">计划发布</a></li>
+					<li><a href="http://localhost:8080/studyPlan/teacherInfo">个人信息</a></li>
+					<li><a href="http://localhost:8080/studyPlan/planList">完成情况统计</a></li>
+					<li><a href="http://localhost:8080/studyPlan/">退出登陆</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 	<div class="container">
 		<table id="tb_departments"></table>
 	</div>

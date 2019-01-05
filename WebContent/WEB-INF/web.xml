@@ -11,11 +11,6 @@
 			<param-value>WEB-INF/springmvc-servlet.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
-		<multipart-config>
-			<location>/uploads</location>
-			<max-file-size>2097152</max-file-size>
-			<max-request-size>4194304</max-request-size>
-		</multipart-config>
 	</servlet>
 	
 	<!-- Servlet studyPlan处理所有用户请求 -->

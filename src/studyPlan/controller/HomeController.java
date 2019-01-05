@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import studyPlan.model.Student;
 import studyPlan.service.StudentService;
 import studyPlan.util.FilePathUtil;
+import studyPlan.util.FileUploadUtil;
 
 /*
  * 
@@ -40,10 +41,22 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = { "/upload" })
-	public String fileUpload(MultipartFile uploadFile) {
+	public @ResponseBody String fileUpload(@RequestParam MultipartFile uploadFile,@RequestParam String userName,@RequestParam String userId) {
 		System.out.println(System.getProperty("studyPlan.root"));
-		
-		String uploadPath =System.getProperty("studyPlan.root")+ File.separator + uploadFile.getOriginalFilename();
+		System.out.println(userName);
+		System.out.println(userId);
+		System.out.println(FileUploadUtil.FileUpload(uploadFile,"1663710324"));
+		return "1";
+	}
+	
+	@RequestMapping(value = { "/uploadfile" },method = RequestMethod.POST)
+	public String uploadfile(MultipartFile uploadFile,@RequestParam String userNames,@RequestParam String passwords) {
+		System.out.println(System.getProperty("studyPlan.root"));
+		System.out.println(userNames);
+		System.out.println(passwords);
+		System.out.println(uploadFile.getOriginalFilename());
+		FileUploadUtil.FileUpload(uploadFile,"1663710324");
+		/*String uploadPath =System.getProperty("studyPlan.root") + uploadFile.getOriginalFilename();
 		try {
 			FileOutputStream fs = new FileOutputStream(uploadPath);
 			fs.write(uploadFile.getBytes());
@@ -51,8 +64,13 @@ public class HomeController {
 			System.out.println(uploadPath);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		}*/
 		return "login";
+	}
+	@RequestMapping(value = { "/uploadfile" },method = RequestMethod.GET)
+	public String uploadfiles() {
+		
+		return "uploadFileDemo";
 	}
 
 }

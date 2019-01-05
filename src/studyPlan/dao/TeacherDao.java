@@ -51,11 +51,11 @@ public class TeacherDao {
 	/**
 	 * @功能:修改教师的个人信息
 	 * @返回值:0修改失败,1修改成功
-	 * */
+	 */
 	public int updateTeacherInfo(Teacher teacher) {
-		String sql = "update teacher set teacherName=?,teacherPassword=?,ResearchDirection=?,teacherSex=?,title=? where teacherNo=?";
+		String sql = "update teacher set teacherName=?,teacherPassword=?,ResearchDirection=?,teacherSex=?,title=?,headImage=? where teacherNo=?";
 		int flag = jdbcTemplate.update(sql, teacher.getTeacherName(), teacher.getTeacherPassword(),
-				teacher.getResearchDirection(), teacher.getTeacherSex(), teacher.getTitle(),
+				teacher.getResearchDirection(), teacher.getTeacherSex(), teacher.getTitle(), teacher.getHeadImage(),
 				teacher.getTeacherNo());
 		if (flag > 0)
 			return 1;

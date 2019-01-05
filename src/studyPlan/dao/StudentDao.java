@@ -57,8 +57,8 @@ public class StudentDao {
 	 * 
 	 * */
 	public int updateStudentInfo(Student student) {
-		String sql = "update student  set studentName=?,studentPassword=?,major=?,studentSex=? where studentNo=?";
-		int flag = jdbcTemplate.update(sql,student.getStudentName(),student.getStudentPassword(),student.getMajor(),student.getStudentSex(),student.getStudentNo());
+		String sql = "update student  set studentName=?,studentPassword=?,major=?,studentSex=?,headImage=? where studentNo=?";
+		int flag = jdbcTemplate.update(sql,student.getStudentName(),student.getStudentPassword(),student.getMajor(),student.getStudentSex(),student.getHeadImage(),student.getStudentNo());
 		if (flag > 0)
 			return 1;
 		return 0;

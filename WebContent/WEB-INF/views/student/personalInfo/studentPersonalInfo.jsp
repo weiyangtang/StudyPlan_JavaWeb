@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>个人信息</title>
+<title>学生个人信息</title>
 <meta http-equiv="Expires" content="0">
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta http-equiv="Pragma" content="no-cache">
@@ -16,7 +16,7 @@
 
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/resources/css/bootstrap.css">
-
+<script src="<%=request.getContextPath()%>/resources/layer/layer.js" type="text/javascript"></script>
 <script>
 	$(document).ready(function() {
 		personalInfo();
@@ -52,16 +52,12 @@
 					$("#coin")[0].innerHTML = student.coin;
 
 				if (student.headImage != null) {
-					$("#header").attr("src",
-							"<%=request.getContextPath()%>/resources/images/userPhoto/student/" + student.headImage);
-
-					$("#headerPicture").attr("src",
-							"<%=request.getContextPath()%>/resources/images/userPhoto/student/"
-									+ student.headImage);
+					var headImage="<%=request.getContextPath()%>/uploads/headImage/student/"+ student.headImage;
+					$("#header").attr("src",headImage);
+					$("#headerPicture").attr("src",headImage);			
 				}
-
-				$("#userNames").val(student.studentName);
-				$("#passwords").val(student.studentPassword);
+				$("#userNames").val(student.studentName.trim());
+				$("#passwords").val(student.studentPassword.trim());
 				$("#coins").val(student.coin);
 				$("#majors").val(student.major);
 
@@ -97,33 +93,39 @@
 		var Emails = $('#Emails').val();
 		var sex = $('input[name="sex"]:checked').val();
 		var file = $('#pic')[0].files[0];
-		var title = $("#titles").val();
-
-		var formData = new FormData($('#updateForm')[0]);
-		/* 	formData.append('userNames', userNames);
-			formData.append('passwords', passwords);
-			formData.append('Emails', Emails);
-			formData.append('sex', sex);
-			formData.append('title', title);
-			formData.append('file', file);
-			formData.append('rand', new Date().getTime());
-		 */
-		$.ajax({
-			type : 'post',
-			url : 'updateStudentInfo',
-			async : false,
-			data : formData,
-			cache : false,
-			contentType : false,
-			processData : false,
-			success : function(result) {
-				history.go(0);//清除浏览器缓存,刷新,请求后台
-
-			},
-			error : function() {
-				alert('ERROR!');
+		var majors = $("#majors").val();
+        
+		if (userNames == null || userNames == "") {
+			layer.msg("用户名不能为空");
+			return false;
+		} else if (passwords == null || passwords == "") {
+			layer.msg("密码不能为空");
+			return false;
 			}
-		});
+		else if (majors == null || majors == "") {
+			layer.msg("专业不为空");
+		}else{
+			var formData = new FormData($('#updateForm')[0]);
+			$.ajax({
+				type : 'post',
+				url : 'updateStudentInfo',
+				async : false,
+				data : formData,
+				cache : false,
+				contentType : false,
+				processData : false,
+				success : function(result) {
+					layer.msg("个人信息修改成功");
+					history.go(0);//清除浏览器缓存,刷新,请求后台
+				},
+				error : function() {
+					alert('ERROR!');
+				}
+			});
+		}
+		
+		
+		
 	}
 </script>
 <style>
@@ -271,7 +273,7 @@
 								<label for="pic" class="btn btn-default">更换头像</label> <input
 									type="file" accept="image/gif, image/jpeg,image/jpg,image/png"
 									class="btn btn-default" style="display: none;"
-									onchange="headerPic(this)" id="pic" name='pic' value="" />
+									onchange="headerPic(this)" id="pic" name='uploadFile' value="" />
 							</div>
 						</form>
 					</div>

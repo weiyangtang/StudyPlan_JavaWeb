@@ -41,8 +41,8 @@
 
 	function initTable() {
 
-		$
-				.ajax({
+		
+				$.ajax({
 					type : 'post',
 					url : 'planList',
 					async : false,

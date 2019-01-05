@@ -14,7 +14,31 @@
 <script>
 	function submitForm() {
 		var form = new FormData(document.getElementById("updateForm"));
-		
+		form.append('userId','1663710324');
+		$.ajax({
+			type : "POST",
+			url : "upload",
+			data : form,
+			cache : false,
+			contentType : false,
+			processData : false,
+			async : false,
+			success : function(data) {
+				alert("ok");
+			},
+			error : function() {
+				alert('ERROR!');
+			}
+		});
+	}
+	function submitFormAppend(){
+		var form=new FormData(document.getElementById("updateForm"));
+		var file=$('#files')[0].files;
+		var userName=$('#userName').val();
+		form.append('uploadFile',file);
+		form.append('userName',userName);
+		form.append('userId','1663710324');
+		console.log(form.get('uploadFile'));
 		$.ajax({
 			type : "POST",
 			url : "upload",
@@ -36,10 +60,11 @@
 <body>
 	<form id="updateForm" enctype="multipart/form-data">
 		<p>
-			用户信息：<input type="text" name="userName">
+			用户信息：<input type="text" id='userName' name="userName">
 			上传文件：<input type="file" id='files' name="uploadFile" />
 		</p>
 		<button type="button" onclick="submitForm()">ajax提交</button>
+		<button type="button" onclick="submitFormAppend()">ajaxformdata提交</button>
 		 <input type="submit" value="提交" />
 	</form>
 </body>

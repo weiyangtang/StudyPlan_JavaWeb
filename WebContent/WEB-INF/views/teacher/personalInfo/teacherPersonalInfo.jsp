@@ -10,13 +10,11 @@
 <meta name="" content="" charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
-<script
-	src="<%=request.getContextPath()%>/resources/js/jquery-3.3.1.min.js"></script>
+<script src="<%=request.getContextPath()%>/resources/js/jquery-3.3.1.min.js"></script>
 <script src="<%=request.getContextPath()%>/resources/js/bootstrap.js"></script>
 
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/css/bootstrap.css">
-
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/bootstrap.css">
+<script src="<%=request.getContextPath()%>/resources/layer/layer.js" type="text/javascript"></script>
 <script>
 	$(document).ready(function() {
 		personalInfo();
@@ -51,10 +49,9 @@
 					$("#title")[0].innerHTML = teacher.title;
 
 				if (teacher.headImage != null) {
-					$("#header").attr("src","<%=request.getContextPath()%>/resources/images/userPhoto/teacher/" + teacher.headImage);
-					$("#headerPicture").attr("src","<%=request.getContextPath()%>/resources/images/userPhoto/teacher/"
-											+ teacher.headImage);
-
+					var headImage="<%=request.getContextPath()%>/uploads/headImage/teacher/"+ teacher.headImage;
+							$("#header").attr("src", headImage);
+							$("#headerPicture").attr("src", headImage);
 						}
 
 						$("#userNames").val(teacher.teacherName);
@@ -91,33 +88,45 @@
 
 		var userNames = $('#userNames').val();
 		var passwords = $('#passwords').val();
-		var Emails = $('#Emails').val();
 		var sex = $('input[name="sex"]:checked').val();
+		var ResearchDirections=$('#ResearchDirections').val();
 		var file = $('#pic')[0].files[0];
 		var title = $("#titles").val();
-
-		var formData = new FormData(document.getElementById("updateForm"));
-		$.ajax({
-			type : 'post',
-			url : 'updateTeacherInfo',
-			async : false,
-			data : formData,
-			cache : false,
-			contentType : false,
-			processData : false,
-			success : function(result) {
-				//alert(result);
-				history.go(0);//清除浏览器缓存,刷新,请求后台
-
-			},
-			error : function() {
-				alert('ERROR!');
+		if (userNames == null || userNames == "") {
+			layer.msg("用户名不能为空");
+			return false;
+		} else if (passwords == null || passwords == "") {
+			layer.msg("密码不能为空");
+			return false;
 			}
-		});
+		else if (ResearchDirections == null || ResearchDirections == "") {
+			layer.msg("研究方向不为空");
+		}else if (title == null || title == "") {
+			layer.msg("职称不为空");
+		}else{
+			var formData = new FormData(document.getElementById("updateForm"));
+			$.ajax({
+				type : 'post',
+				url : 'updateTeacherInfo',
+				async : false,
+				data : formData,
+				cache : false,
+				contentType : false,
+				processData : false,
+				success : function(result) {
+					layer.msg("个人信息修改成功");
+					history.go(0);//清除浏览器缓存,刷新,请求后台
+
+				},
+				error : function() {
+					alert('ERROR!');
+				}
+			});
+		}
+		
 	}
 </script>
 <style>
-
 </style>
 </head>
 <body>
@@ -251,7 +260,7 @@
 									class="form-control" name="passwords" id="passwords" value="">
 							</div>
 							<div class="rows">
-								<label>专业:</label> <input type="text" placeholder="研究方向"
+								<label>研究方向:</label> <input type="text" placeholder="研究方向"
 									class="form-control" name="ResearchDirections"
 									id="ResearchDirections" value="">
 							</div>
@@ -268,7 +277,7 @@
 								<label for="pic" class="btn btn-default">更换头像</label> <input
 									type="file" accept="image/gif, image/jpeg,image/jpg,image/png"
 									class="btn btn-default" style="display: none;"
-									onchange="headerPic(this)" id="pic" name='pic' value="" />
+									onchange="headerPic(this)" id="pic" name='uploadFile' value="" />
 							</div>
 						</form>
 					</div>

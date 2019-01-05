@@ -21,6 +21,7 @@ import studyPlan.service.LoginService;
 import studyPlan.service.StudentService;
 import studyPlan.service.TeacherService;
 import studyPlan.util.FilePathUtil;
+import studyPlan.util.FileUploadUtil;
 
 @Controller
 public class PersonalInfoController {
@@ -37,7 +38,7 @@ public class PersonalInfoController {
 	@RequestMapping(value = { "/studentInfo" }, method = RequestMethod.GET)
 	public String studentInfo(HttpSession session) {
 
-		//session.setAttribute("studentNo", "1605010203");// 测试,合并删除
+		// session.setAttribute("studentNo", "1605010203");// 测试,合并删除
 
 		String studentNo = (String) session.getAttribute("studentNo");
 		if (studentNo == null)
@@ -65,17 +66,32 @@ public class PersonalInfoController {
 	/**
 	 * @功能:修改学生的个人信息
 	 * @返回值:0修改失败,1修改成功
-	 * 
+	 * @附加功能:学生头像上传
 	 */
 	@RequestMapping(value = { "/updateStudentInfo" }, method = RequestMethod.POST)
-	public @ResponseBody int updateStudentInfo(HttpSession session, @RequestParam String userNames,
+	public @ResponseBody int updateStudentInfo(HttpSession session,
+			@RequestParam(value = "uploadFile") MultipartFile uploadFile, @RequestParam String userNames,
 			@RequestParam String passwords, @RequestParam String majors, @RequestParam String sex) {
-		System.out.println(userNames + "\t" + passwords + "\t" + majors + "\t" + sex);
 
+		System.out.println(userNames + "\t" + passwords + "\t" + majors + "\t" + sex);
 		String studentNo = (String) session.getAttribute("studentNo");
+
 		if (studentNo == null)
 			return 0;
-		Student student = new Student(studentNo, userNames, passwords, majors, 0, sex, null);
+		String headImage = "";
+		if (uploadFile == null || uploadFile.getSize() <= 0) {//上传头像为空,即用户不修改头像
+			Student student = studentService.findStudent(studentNo);
+			headImage = student.getHeadImage();
+		} else {//修改头像
+			String fileExtends = uploadFile.getOriginalFilename()
+					.substring(uploadFile.getOriginalFilename().lastIndexOf(".") + 1);
+			headImage = studentNo + "." + fileExtends;
+			String filePath = System.getProperty("studyPlan.root") + "uploads" + File.separator + "headImage"
+					+ File.separator + "student" + File.separator + headImage;
+			FileUploadUtil.FileUpload(uploadFile, filePath);
+		}
+
+		Student student = new Student(studentNo, userNames, passwords, majors, 0, sex, headImage);
 		System.out.println(studentService.updateStudentInfo(student));
 		return studentService.updateStudentInfo(student);
 	}
@@ -90,7 +106,7 @@ public class PersonalInfoController {
 	@RequestMapping(value = { "/teacherInfo" }, method = RequestMethod.GET)
 	public String teacherInfo(HttpSession session) {
 
-		//session.setAttribute("teacherNo", "1663710324");// 测试,合并删除
+		// session.setAttribute("teacherNo", "1663710324");// 测试,合并删除
 
 		String studentNo = (String) session.getAttribute("teacherNo");
 		if (studentNo == null)
@@ -118,18 +134,33 @@ public class PersonalInfoController {
 	/**
 	 * @功能:修改教师的个人信息
 	 * @返回值:0修改失败,1修改成功
-	 * 
+	 * @附加功能:头像上传,头像名称为教师工号+头像的后缀名,文件地址在项目部署下的uploads/headerImage/teacher文件夹下
 	 */
 	@RequestMapping(value = { "/updateTeacherInfo" }, method = RequestMethod.POST)
-	public @ResponseBody int updateTeacherInfo(HttpSession session, @RequestParam String userNames,
+	public @ResponseBody int updateTeacherInfo(HttpSession session,
+			@RequestParam(value = "uploadFile") MultipartFile uploadFile, @RequestParam String userNames,
 			@RequestParam String passwords, @RequestParam String ResearchDirections, @RequestParam String titles,
 			@RequestParam String sex) {
-		System.out.println(userNames + "\t" + passwords + "\t" + ResearchDirections + "\t" + titles + "\t" + sex);
 
 		String teacherNo = (String) session.getAttribute("teacherNo");
 		if (teacherNo == null)
-			return 0;
-		Teacher teacher = new Teacher(teacherNo, userNames, passwords, sex, titles, ResearchDirections, null);
+			return 0; // 未登录
+
+		String headImage = "";
+		if (uploadFile == null || uploadFile.getSize() <= 0) {// 头像为空,即
+			Teacher teacher = teacherService.findTeacher(teacherNo);
+			headImage = teacher.getHeadImage();
+		} else {// 修改头像
+
+			String fileExtends = uploadFile.getOriginalFilename()
+					.substring(uploadFile.getOriginalFilename().lastIndexOf(".") + 1);
+			headImage = teacherNo + "." + fileExtends;
+			String filePath = System.getProperty("studyPlan.root") + "uploads" + File.separator + "headImage"
+					+ File.separator + "teacher" + File.separator + headImage;
+			FileUploadUtil.FileUpload(uploadFile, filePath);
+		}
+
+		Teacher teacher = new Teacher(teacherNo, userNames, passwords, sex, titles, ResearchDirections, headImage);
 		return teacherService.updateTeacherInfo(teacher);
 	}
 }

@@ -26,9 +26,11 @@
 
 </head>
 <body>
-<nav class="navbar-inverse visible-lg visible-md" role="navigation">
+	<nav class="navbar-inverse visible-lg visible-md" role="navigation">
 		<div class="container">
-			<div class="navbar-header"> <a class="navbar-brand" href="#">学习计划打卡系统</a> </div>
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">学习计划打卡系统</a>
+			</div>
 			<div>
 				<ul class="nav navbar-nav">
 					<li><a href="#">计划发布</a></li>
@@ -41,7 +43,8 @@
 	</nav>
 	<div class="container">
 		<div class="row">
-			<form class="form-horizontal col-md-6" id="planPublish" method="post">
+			<form class="form-horizontal col-md-6" id="planPublish"  enctype="multipart/form-data">
+			
 				<fieldset id="">
 					<legend>制定发布学习计划</legend>
 				</fieldset>
@@ -73,21 +76,20 @@
 				<div class="form-group ">
 					<label class="col-md-2 control-label">计划内容:</label>
 					<div class="col-md-6">
-						<textarea class="form-control" rows="5" id="planContent"
-							name="planContent"></textarea>
+						<textarea class="form-control" rows="5" id="planContext"
+							name="planContext"></textarea>
 					</div>
 				</div>
 				<div class="form-group ">
 					<label class="col-md-2 control-label">文件上传:</label>
 					<div class="col-md-4">
-						<input type="file" name="planFile" id="planFile" value="" />
+						<input type="file" name="uploadFile" id="planFile" value="" />
 					</div>
-			
-				<div class="form-group ">
-					<button type="button" onclick="submitForm()"
-						class="btn btn-primary pull-right">提交计划</button>
-				</div>
 
+					<div class="form-group ">
+						<button type="button" onclick="submitForm()"
+							class="btn btn-primary pull-right">提交计划</button>
+					</div>
 			</form>
 		</div>
 </body>
@@ -118,11 +120,11 @@
 			})
 
 	function submitForm() {
-		var planContent = $('#planContent').val();
+		var planContext = $('#planContext').val();
 		var planName = $('#planName').val();
 		var planType = $("#planType")[0].selectedIndex + 1;
 		var credit = $('#credit').val();
-		if (planContent == null || planContent == "") {
+		if (planContext == null || planContext == "") {
 			layer.msg("计划内容不能为空");
 		} else if (planName == null || planName == "") {
 			layer.msg("计划名称不能为空");
@@ -134,16 +136,13 @@
 				type : 'post',
 				url : 'PlanPublish',
 				async : false,
-				/* contentType : false,
-				processData : false, */
-				data : {
-					"planTypeNo" : planType,
-					"planName" : planName,
-					"planContext" : planContent,
-					"coinNum" : credit
-				},
+				data : form,
+				cache : false,
+				contentType : false,
+				processData : false,
+				data : form,
 				success : function(result) {
-					if (result >0)
+					if (result > 0)
 						layer.msg("计划发布成功");
 					else
 						layer.msg("计划发布失败");

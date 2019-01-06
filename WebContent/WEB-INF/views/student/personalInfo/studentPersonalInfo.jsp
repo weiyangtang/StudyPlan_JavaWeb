@@ -129,24 +129,13 @@
 	}
 </script>
 <style>
-
+   body{
+     padding-top:70px;
+   }
 </style>
 </head>
 <body>
-	<nav class="navbar-inverse visible-lg visible-md" role="navigation">
-		<div class="container">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#">学习计划打卡系统</a>
-			</div>
-			<div>
-				<ul class="nav navbar-nav">
-					<li><a href="#">个人信息</a></li>
-					<li><a href="http://localhost:8080/studyPlan/choose">计划池</a></li>
-					<li><a href="http://localhost:8080/studyPlan/punch">计划打卡</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+	
 	<div class="container">
 		<div class="row" style="background: #EEEEEE;">
 			<!-- 左侧 -->

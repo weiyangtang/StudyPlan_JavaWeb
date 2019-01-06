@@ -27,8 +27,13 @@ public class FileUploadUtil {
 
 		if (uploadFile == null)
 			return 0;
+
 		try {
 			File file = new File(filePath);
+			File fileParent = file.getParentFile();//路径不存在时创建文件夹
+			if (!fileParent.exists()) {
+				fileParent.mkdirs();
+			}
 			FileOutputStream fs = new FileOutputStream(file);
 			fs.write(uploadFile.getBytes());
 			fs.close();

@@ -26,25 +26,12 @@
 
 </head>
 <body>
-	<nav class="navbar-inverse visible-lg visible-md" role="navigation">
-		<div class="container">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#">学习计划打卡系统</a>
-			</div>
-			<div>
-				<ul class="nav navbar-nav">
-					<li><a href="#">计划发布</a></li>
-					<li><a href="http://localhost:8080/studyPlan/teacherInfo">个人信息</a></li>
-					<li><a href="http://localhost:8080/studyPlan/planList">完成情况统计</a></li>
-					<li><a href="http://localhost:8080/studyPlan/">退出登陆</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+	
 	<div class="container">
 		<div class="row">
-			<form class="form-horizontal col-md-6" id="planPublish"  enctype="multipart/form-data">
-			
+			<form class="form-horizontal col-md-6" id="planPublish"
+				enctype="multipart/form-data">
+
 				<fieldset id="">
 					<legend>制定发布学习计划</legend>
 				</fieldset>
@@ -63,21 +50,37 @@
 					<label class="col-md-2 control-label">计划名称:</label>
 					<div class="col-md-4">
 						<input type="text" class="form-control required" name="planName"
-							id="planName">
+							placeholder="计划名称不能超过20个汉字" id="planName">
 					</div>
 				</div>
 				<div class="form-group ">
-					<label class="col-md-2 control-label">分值:</label>
+					<label class="col-md-2 control-label">积分:</label>
 					<div class="col-md-4">
 						<input type="text" class="form-control required" name="credit"
-							id="credit">
+							placeholder="积分为数字" id="credit">
+					</div>
+				</div>
+				<div class="form-group ">
+					<label class="col-md-2 control-label">开始时间:</label>
+					<div class="col-md-4">
+						<input type="text" class="form-control required" name="startTime"
+							id="startTime" placeholder="开始时间大于等于今日日期"
+							onClick="WdatePicker({skin:'whyGreen',minDate:'%y-%M-{%d}',maxDate:'#F{$dp.$D(\'endTime\')}'})" />
+					</div>
+				</div>
+				<div class="form-group ">
+					<label class="col-md-2 control-label">截止时间:</label>
+					<div class="col-md-4">
+						<input type="text" class="form-control required" name="endTime"
+							id="endTime" placeholder="截止日期大于开始日期"
+							onClick="WdatePicker({minDate:'#F{$dp.$D(\'startTime\')}'})">
 					</div>
 				</div>
 				<div class="form-group ">
 					<label class="col-md-2 control-label">计划内容:</label>
 					<div class="col-md-6">
 						<textarea class="form-control" rows="5" id="planContext"
-							name="planContext"></textarea>
+							placeholder="请字数控制在50字以内,如有更多信息,请上传文件,详细说明" name="planContext"></textarea>
 					</div>
 				</div>
 				<div class="form-group ">
@@ -85,11 +88,11 @@
 					<div class="col-md-4">
 						<input type="file" name="uploadFile" id="planFile" value="" />
 					</div>
-
-					<div class="form-group ">
-						<button type="button" onclick="submitForm()"
-							class="btn btn-primary pull-right">提交计划</button>
-					</div>
+				</div>
+				<div class="form-group ">
+					<button type="button" onclick="submitForm()"
+						class="btn btn-primary pull-right">提交计划</button>
+				</div>
 			</form>
 		</div>
 </body>
@@ -124,14 +127,23 @@
 		var planName = $('#planName').val();
 		var planType = $("#planType")[0].selectedIndex + 1;
 		var credit = $('#credit').val();
+		var startTime = new Date($('#startTime').val());
+		var endTime = new Date($('#endTime').val());
+		//var endTime=$('#endTime').val();
+		console.log(startTime);
 		if (planContext == null || planContext == "") {
 			layer.msg("计划内容不能为空");
 		} else if (planName == null || planName == "") {
 			layer.msg("计划名称不能为空");
 		} else if (credit == null || credit == "") {
 			layer.msg("计划积分不能为空");
+		} else if (startTime == null || startTime == "") {
+			layer.msg("开始时间不能为空");
+		} else if (endTime == null || endTime == "") {
+			layer.msg("结束时间不能为空");
 		} else {
 			var form = new FormData(document.getElementById("planPublish"));
+			form.append('planTypeNo', planType);
 			$.ajax({
 				type : 'post',
 				url : 'PlanPublish',

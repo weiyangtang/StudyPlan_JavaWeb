@@ -4,6 +4,22 @@ import java.sql.Date;
 
 public class StageAcceptanceRecord {
 	/**
+	 * @param stageCardNo
+	 * @param completionStatus
+	 * @param completionTime
+	 * @param planSelectionNo
+	 * @param timeLength
+	 */
+	public StageAcceptanceRecord(int stageCardNo, String completionStatus, Date completionTime, int planSelectionNo,
+			double timeLength) {
+		super();
+		this.stageCardNo = stageCardNo;
+		this.completionStatus = completionStatus;
+		this.completionTime = completionTime;
+		this.planSelectionNo = planSelectionNo;
+		this.timeLength = timeLength;
+	}
+	/**
 	 * 
 	 */
 	public StageAcceptanceRecord() {
@@ -27,6 +43,8 @@ public class StageAcceptanceRecord {
 	private String completionStatus;
 	private Date completionTime;
 	private int planSelectionNo;
+	private double timeLength;
+	
 	public int getStageCardNo() {
 		return stageCardNo;
 	}
@@ -50,5 +68,11 @@ public class StageAcceptanceRecord {
 	}
 	public void setPlanSelectionNo(int planSelectionNo) {
 		this.planSelectionNo = planSelectionNo;
+	}
+	public double getTimeLength() {
+		return timeLength;
+	}
+	public void setTimeLength(double timeLength) {
+		this.timeLength = timeLength;
 	}
 }

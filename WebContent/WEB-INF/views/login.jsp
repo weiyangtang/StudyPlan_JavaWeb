@@ -52,11 +52,11 @@
 						alert("密码错误");
 					else if(option == 1){
 						//学生
-						var url = "studentInfo";
+						var url = "studentFrame";
 						window.location.href = url;
 // 						alert("密码正确");
 					}else{
-						var url = "teacherInfo";
+						var url = "teacherFrame";
 						window.location.href = url;
 						//老师
 					}

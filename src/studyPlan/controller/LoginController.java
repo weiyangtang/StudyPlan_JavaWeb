@@ -48,5 +48,25 @@ public class LoginController {
 		return flag;
 		
 	}
+	
+	/**
+	 * @功能:返回学生总体的框架frame视图,导航
+	 * */
+	@RequestMapping(value = { "/studentFrame" }, method = RequestMethod.GET)
+	public String studentFrame() {
+		
+		return "student/studentFrame";
+	}
+	
+	/**
+	 * @功能:返回教师总体的框架frame视图,导航
+	 * */
+	@RequestMapping(value = { "/teacherFrame" }, method = RequestMethod.GET)
+	public String teacherFrame() {
+		
+		return "teacher/teacherFrame";
+	}
+	
+	
 
 }

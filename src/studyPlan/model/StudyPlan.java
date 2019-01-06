@@ -1,6 +1,32 @@
 package studyPlan.model;
 
+import java.sql.Date;
+
 public class StudyPlan {
+	/**
+	 * @param planNo
+	 * @param planTypeNo
+	 * @param planName
+	 * @param coinNum
+	 * @param planContext
+	 * @param planInfoFile
+	 * @param teacherNo
+	 * @param startTime
+	 * @param endTime
+	 */
+	public StudyPlan(int planNo, String planTypeNo, String planName, float coinNum, String planContext,
+			String planInfoFile, String teacherNo, Date startTime, Date endTime) {
+		super();
+		this.planNo = planNo;
+		this.planTypeNo = planTypeNo;
+		this.planName = planName;
+		this.coinNum = coinNum;
+		this.planContext = planContext;
+		this.planInfoFile = planInfoFile;
+		this.teacherNo = teacherNo;
+		this.startTime = startTime;
+		this.endTime = endTime;
+	}
 	/**
 	 * 
 	 */
@@ -54,6 +80,8 @@ public class StudyPlan {
 	private String planContext;
 	private String planInfoFile;
 	private String teacherNo;
+	private Date startTime;
+	private Date endTime;
 	
 	public int getPlanNo() {
 		return planNo;
@@ -96,6 +124,18 @@ public class StudyPlan {
 	}
 	public void setTeacherNo(String teacherNo) {
 		this.teacherNo = teacherNo;
+	}
+	public Date getStartTime() {
+		return startTime;
+	}
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+	public Date getEndTime() {
+		return endTime;
+	}
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
 	}
 	
 }

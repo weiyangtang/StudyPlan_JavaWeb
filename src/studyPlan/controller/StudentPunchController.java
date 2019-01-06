@@ -1,5 +1,9 @@
 package studyPlan.controller;
 
+import java.sql.Date;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,40 +11,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import studyPlan.model.StudyPlan;
-import studyPlan.service.StudentPunchService;
-import studyPlan.util.JsonUtils;
+import studyPlan.model.PunchCard;
+import studyPlan.service.PunchCardService;
 
 @Controller
 public class StudentPunchController {
-	
+
 	@Autowired
-	StudentPunchService studentPunchService= null;
-	
+	PunchCardService punchCardService = null;
+
 	/**
+	 * @功能:返回打卡页面
 	 * 
-	 * 返回打卡界面
-	 * 
-	 * */	
+	 */
 	@RequestMapping(value = { "/punch" }, method = RequestMethod.GET)
 	public String searchandchoose() {
 		return "student/studentPunch/punch";
-	}	
-	
-//	/**
-//	 * 
-//	 * @功能:获取老师发布的所有计划
-//	 * @返回值:返回发布计划的JSON格式
-//	 * 
-//	 */
-//	@RequestMapping(value = {"/punch"}, method = RequestMethod.POST)
-//	public  @ResponseBody String getStudyPlan(String num) {
-//		int number =  Integer.parseInt(num.trim());
-//		StudyPlan[] sp = studentPunchService.findPlanByNumber(number);
-//		String jsonStr = JsonUtils.objectToJson(sp);
-//		return jsonStr;
-//	}
-//	
+	}
+
 	/**
 	 * 
 	 * @功能:打卡，把合法数据插入到阶段性打卡表
@@ -48,12 +36,18 @@ public class StudentPunchController {
 	 * @返回值:返回int
 	 * 
 	 */
-	@RequestMapping(value = {"/punch"}, method = RequestMethod.POST)
-	public  @ResponseBody int punch(@RequestParam String planNo,
-			@RequestParam String number) {
-		int planno =  Integer.parseInt(planNo.trim());
-		int num = Integer.parseInt(number.trim());;
-		int ans = studentPunchService.punch(planno,num);
-		return ans;
+	@RequestMapping(value = { "/punch" }, method = RequestMethod.POST)
+	public @ResponseBody int punch(@RequestParam("planNo") String planNo, @RequestParam("timeLength") String timeLength,
+			HttpSession session) {
+	
+		String studentNo = (String) session.getAttribute("studentNo");
+		if (studentNo == null)
+			return 0;
+		Date date = new java.sql.Date(new java.util.Date().getTime());
+		int pno = Integer.parseInt(planNo);
+		double timeLen = Double.parseDouble(timeLength);
+
+		PunchCard punchCard = new PunchCard(0, pno, studentNo, date, timeLen);
+		return punchCardService.punchCard(punchCard);
 	}
 }

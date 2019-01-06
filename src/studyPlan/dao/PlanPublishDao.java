@@ -25,6 +25,10 @@ public class PlanPublishDao {
 	BeanPropertyRowMapper PlanTypeMapper = BeanPropertyRowMapper.newInstance(PlanType.class);
 	BeanPropertyRowMapper PlanPublishMapper = BeanPropertyRowMapper.newInstance(PlanPublishDao.class);
 
+	/**
+	 * @功能:返回所有学习计划 的类型
+	 * 
+	 */
 	public PlanType[] findAllPlanType() {
 		String sql = "select * from planType";
 		List<Student> list = jdbcTemplate.query(sql, PlanTypeMapper);
@@ -45,7 +49,7 @@ public class PlanPublishDao {
 	 */
 	public StudyPlan planPublish(StudyPlan plan) {
 
-		final String sql = "insert studyPlan(planName,planTypeNo,planContext,coinNum,teacherNo,planInfoFile) values(?,?,?,?,?,?)";
+		final String sql = "insert studyPlan(planName,planTypeNo,planContext,coinNum,teacherNo,planInfoFile,startTime,endTime) values(?,?,?,?,?,?,?,?)";
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		jdbcTemplate.update(new PreparedStatementCreator() {
 			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
@@ -57,6 +61,8 @@ public class PlanPublishDao {
 				ps.setFloat(4, plan.getCoinNum());
 				ps.setString(5, plan.getTeacherNo());
 				ps.setString(6, plan.getPlanInfoFile());
+				ps.setDate(7, plan.getStartTime());
+				ps.setDate(8, plan.getEndTime());
 				return ps;
 			}
 		}, keyHolder);
@@ -67,7 +73,7 @@ public class PlanPublishDao {
 
 	/**
 	 * @功能:修改学习计划的文件名称,文件为计划编号+文件后缀名
-	 * */
+	 */
 	public int updatePlan(StudyPlan plan) {
 
 		String sql = "update studyPlan set planInfoFile=? where planNo=?";

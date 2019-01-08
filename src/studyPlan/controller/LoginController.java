@@ -21,7 +21,7 @@ public class LoginController {
 	LoginService loginService = null;
 
 	/* 返回登录界面 */
-	@RequestMapping(value = { "/login", "/", "/index" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/login"}, method = RequestMethod.GET)
 	public String login() {
 		System.out.println("/login is request!");// 测试
 
@@ -37,36 +37,46 @@ public class LoginController {
 	 * @响应代码:0密码错误,1学生密码正确,2教师密码正确
 	 */
 	@RequestMapping(value = { "/login" }, method = RequestMethod.POST)
-	public @ResponseBody int login(HttpSession session,@RequestParam String username, @RequestParam String password,
+	public @ResponseBody int login(HttpSession session, @RequestParam String username, @RequestParam String password,
 			@RequestParam String identity) {
 		System.out.println(username + " " + password + " " + identity);// 测试
 		int flag = loginService.login(username, password, identity);
-		if(flag==1)
+		if (flag == 1)
 			session.setAttribute("studentNo", username);
-		else if(flag==2)
+		else if (flag == 2)
 			session.setAttribute("teacherNo", username);
 		return flag;
-		
+
 	}
-	
+
 	/**
 	 * @功能:返回学生总体的框架frame视图,导航
-	 * */
+	 */
 	@RequestMapping(value = { "/studentFrame" }, method = RequestMethod.GET)
 	public String studentFrame() {
-		
+
 		return "student/studentFrame";
 	}
-	
+
 	/**
 	 * @功能:返回教师总体的框架frame视图,导航
-	 * */
+	 */
 	@RequestMapping(value = { "/teacherFrame" }, method = RequestMethod.GET)
 	public String teacherFrame() {
-		
+
 		return "teacher/teacherFrame";
 	}
-	
-	
+
+	/**
+	 * @功能:退出登录
+	 */
+	@RequestMapping(value = { "/exits" }, method = RequestMethod.GET)
+	public String exits(HttpSession session) {
+		if (session.getAttribute("teacherNo") != null)
+			session.setAttribute("teacherNo", null);
+		else if (session.getAttribute("studentNo") != null)
+			session.setAttribute("studentNo", null);
+		return "login";
+	}
 
 }

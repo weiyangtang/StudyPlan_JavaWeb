@@ -62,31 +62,25 @@
 	
 	function punch() {
 		var formData = new FormData($('#updateForm')[0]);
-		var timeLength=parseFloat($('#timeLength').val());
-		if(timeLength>5||timeLength<=0)
-			layer.msg('每天最多打卡5个小时,但不小于0')
-		else{
-			$.ajax({
-				type : 'post',
-				url : 'punch',
-				async : false,
-				data : formData,
-				cache : false,
-				contentType : false,
-				processData : false,
-				success : function(result) {
-					var timeLength=$('#timeLength').val();
-					if (result > 0)
-						layer.msg("你今天已打卡"+timeLength+"小数,天道酬勤,加油哦!!!!!");
-					else
-						layer.msg("你今天已打卡,一天只能打卡一次");
-				},
-				error : function() {
-					alert("error");
-				}
-			});
-		}
-
+		$.ajax({
+			type : 'post',
+			url : 'punch',
+			async : false,
+			data : formData,
+			cache : false,
+			contentType : false,
+			processData : false,
+			success : function(result) {
+				var timeLength=$('#timeLength').val();
+				if (result > 0)
+					layer.msg("你今天已打卡"+timeLength+"小数,天道酬勤,加油哦!!!!!");
+				else
+					layer.msg("你今天已打卡");
+			},
+			error : function() {
+				alert("error");
+			}
+		});
 
 	}
 	
@@ -96,11 +90,10 @@
 	function initTable() {
 
 		planTypeNo = window.location.href.split("=")[1];
-		
-			
-				$.ajax({
+		$
+				.ajax({
 					type : 'post',
-					url : 'SelectedPlan',
+					url : 'studentPunchCondition',
 					async : false,
 					data : {
 						'planTypeNo' : planTypeNo
@@ -173,8 +166,8 @@
 													},
 													{
 
-														field : 'planTypeName',
-														title : '计划类型名称',
+														field : 'studentNo',
+														title : '学号',
 														align : 'center',
 														valign : 'center',
 														sortable : true,
@@ -188,8 +181,8 @@
 													},
 													{
 
-														field : 'coinNum',
-														title : '计划积分',
+														field : 'studentName',
+														title : '姓名',
 														align : 'center',
 														valign : 'center',
 														sortable : true,
@@ -203,8 +196,8 @@
 													},
 													{
 
-														field : 'planContext',
-														title : '计划概要',
+														field : 'cardNum',
+														title : '打卡时长',
 														align : 'center',
 														valign : 'center',
 														sortable : true,
@@ -215,70 +208,6 @@
 															}
 														}
 
-													},
-													{
-
-														field : 'teacherName',
-														title : '教师姓名',
-														align : 'center',
-														valign : 'center',
-														sortable : true,
-														cellStyle : {
-															css : {
-																"font" : "bold 15px/20px 楷体,arial,sans-serif;",
-																"height" : "20px"
-															}
-														}
-
-													},
-													{
-
-														field : 'planInfoFile',
-														title : '计划资料下载',
-														align : 'center',
-														valign : 'center',
-														sortable : true,
-														cellStyle : {
-															css : {
-																"font" : "bold 15px/20px 楷体,arial,sans-serif;",
-																"height" : "20px"
-															}
-														},
-														formatter : function(
-																value, row,
-																index) {
-															var d = ' <button type="button" class="btn btn-link" onclick="downloadFile(this,\''
-																	+ value
-																	+ '\')" >'
-																	+ '文件下载'
-																	+ '</button> ';
-															return d;
-														}
-
-													},
-													{
-
-														field : 'planList',
-														title : '查看学习计划',
-														align : 'center',
-														formatter : function(
-																value, row,
-																index) {
-															var d = '<button type="button" class="btn btn-link" onclick="lookupList(this)" >查看</button>';
-															return d;
-														}
-													},
-													{
-
-														field : 'punch',
-														title : '学习计划打卡',
-														align : 'center',
-														formatter : function(
-																value, row,
-																index) {
-															var d = '<button type="button" class="btn btn-link" onclick="modelShow(this)" >打卡</button>';
-															return d;
-														}
 													} ],
 
 										});

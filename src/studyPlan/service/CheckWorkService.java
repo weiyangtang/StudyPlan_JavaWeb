@@ -25,6 +25,10 @@ public class CheckWorkService {
 	 * @返回值:0失败,1成功
 	 */
 	public int submitWork(CheckWork checkWork, MultipartFile uploadFile) {
+		//检查是否已提交
+		int falg = checkWorkDao.checkStudentSubmit(checkWork.getStudentNo(), checkWork.getPlanNo());
+		if (falg == 1)
+			return 0;
 		String fileExtends = uploadFile.getOriginalFilename()
 				.substring(uploadFile.getOriginalFilename().lastIndexOf(".") + 1);
 		String fileName = checkWork.getStudentNo() + "." + fileExtends;
@@ -33,7 +37,7 @@ public class CheckWorkService {
 		if (FileUploadUtil.FileUpload(uploadFile, filePath) == 0)
 			return 0;
 
-		fileName = checkWork.getPlanNo() + File.separator + fileName;// 计划编号/学号.后缀名
+		// fileName = checkWork.getPlanNo() + File.separator + fileName;// 计划编号/学号.后缀名
 		checkWork.setStudentFile(fileName);
 		return checkWorkDao.submitWork(checkWork);
 	}
@@ -56,11 +60,19 @@ public class CheckWorkService {
 	/**
 	 * @功能:评分
 	 */
-	
+
 	public int CheckWork(int planNO, String studentNo, double score) {
 		checkWorkDao.CheckWork(planNO, studentNo, score);
 		double coin = studentDao.findStudent(studentNo).getCoin();
 		coin = coin + score;
 		return checkWorkDao.updateStudentCoin(studentNo, coin);
+	}
+	
+	/**
+	 * @功能:查询每次提交成果的积分信息
+	 * @返回值:积分
+	 * */
+	public CheckWork[] findPersonalSubmitStudent(String studentNo) {
+		return checkWorkDao.findPersonalSubmitStudent(studentNo);
 	}
 }

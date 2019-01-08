@@ -27,7 +27,7 @@
 
 
 <script type="text/javascript">
-	var planNo;
+	var planNo,index;
 	var url = window.location.href.toString();
 	$(document).ready(function() {
 		initTable();
@@ -49,6 +49,7 @@
 		var studentNo = $("#tb_departments")[0].rows[rowindex].cells[1].innerHTML;
 		$('#planNo').val(planNo);
 		$('#studentNo').val(studentNo);
+		index=rowindex;
 		$('#myModal').modal("show");
 	}
 	
@@ -63,9 +64,14 @@
 			contentType : false,
 			processData : false,
 			success : function(result) {
-				var timeLength=$('#timeLength').val();
-				if (result > 0)
+				var score=parseFloat($('#score').val());
+				if(score<=0){
+					layer.msg('评分必须大于0')
+				}
+				else if (result > 0){
+					$("#tb_departments")[0].rows[index].cells[3].innerHTML=score;
 					layer.msg("评分成功");
+				}
 				else
 					layer.msg("评分失败");
 			},
@@ -78,8 +84,8 @@
 
 	function initTable() {
 		planNo = window.location.href.split("=")[1];
-		$
-				.ajax({
+		
+				$.ajax({
 					type : 'post',
 					url : 'AllSubmitStudentList',
 					async : false,
@@ -180,6 +186,15 @@
 																"font" : "bold 15px/20px 楷体,arial,sans-serif;",
 																"height" : "20px"
 															}
+														},
+														formatter : function(
+																value, row,
+																index) {
+															var score=parseFloat(value);
+															if(score==0)
+																return "未验收";
+															var d = value;
+															return d;
 														}
 
 													},

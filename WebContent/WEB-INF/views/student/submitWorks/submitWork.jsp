@@ -81,7 +81,7 @@
 					if (result > 0)
 						layer.msg("成果提交成功");
 					else
-						layer.msg("提交失败");
+						layer.msg("提交失败,计划成果不能重复提交");
 				},
 				error : function() {
 					alert("error");

@@ -115,26 +115,6 @@
 													},
 													{
 
-														field : 'createPlanType',
-														title : '计划类型创建',
-														align : 'center',
-														valign : 'center',
-														sortable : true,
-														cellStyle : {
-															css : {
-																"font" : "bold 15px/20px 楷体,arial,sans-serif;",
-																"height" : "20px"
-															}
-														},formatter : function(
-																value, row,
-																index) {
-															var d = '<button type="button" class="btn btn-link" onclick="lookupList(this) " >计划类型创建</button>';
-															return d;
-														}
-
-													},
-													{
-
 														field : 'planList',
 														title : '查看学习计划类型',
 														align : 'center',

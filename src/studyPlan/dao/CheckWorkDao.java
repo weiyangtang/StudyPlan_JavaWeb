@@ -11,6 +11,7 @@ import studyPlan.model.CardCondition;
 import studyPlan.model.CheckWork;
 import studyPlan.model.PunchCard;
 import studyPlan.model.Student;
+import studyPlan.model.StudentPlanSelection;
 import studyPlan.model.StudyPlan;
 
 @Repository
@@ -19,6 +20,22 @@ public class CheckWorkDao {
 	JdbcTemplate jdbcTemplate = null;
 	BeanPropertyRowMapper CheckWorkMapper = BeanPropertyRowMapper.newInstance(CheckWork.class);
 	BeanPropertyRowMapper StudyPlanMapper = BeanPropertyRowMapper.newInstance(StudyPlan.class);
+	
+	
+	/**
+	 * 
+	 * @功能:检查是否提交过计划成果
+	 * @返回值:0未提交,1已提交
+	 * */
+	public int checkStudentSubmit(String studentNo, int planNo) {
+
+		String sql = "select * from checkWork where studentNo=? and planNo=?";
+		List<StudentPlanSelection> list = jdbcTemplate.query(sql, CheckWorkMapper, studentNo,planNo);
+		if (list == null || list.size() <= 0)
+			return 0;
+		else
+			return 1;
+	}
 
 	/**
 	 * 
@@ -75,5 +92,17 @@ public class CheckWorkDao {
 			return 1;
 		return 0;
 	}
+	
+	/**
+	 * @功能:查询每次提交成果的积分信息
+	 * @返回值:积分
+	 * */
+	public CheckWork[] findPersonalSubmitStudent(String studentNo) {
+		String sql = "select * from planScore where studentNo=?";
+		List<CheckWork> list = jdbcTemplate.query(sql, CheckWorkMapper, studentNo);
+		return list.toArray(new CheckWork[0]);
+	}
+
+	
 
 }

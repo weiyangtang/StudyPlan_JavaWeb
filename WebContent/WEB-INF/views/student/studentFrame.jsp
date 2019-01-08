@@ -43,9 +43,10 @@
 	</div>
 	<div class="top_menu">
 		<ul>
-			<li id="first"><a href="#" target="_blank">首页</a></li>
+			<li id="first"><a href="/studyPlan/index.html" target="_blank">首页</a></li>
 			<li><a href="#" onclick="iframeHistory(-1)">后退</a></li>
 			<li><a href="#" onclick="refresh()">刷新</a></li>
+			<li><a href="/studyPlan/exits">退出登录</a></li>
 		</ul>
 	</div>
 	<div class="container">
@@ -58,17 +59,13 @@
 					src="<%=request.getContextPath()%>/images/left/custom.png" alt="" />个人信息
 					<ul>
 						<li><a href="#"
-							onclick="iframeSet('/studyPlan/studentInfo')">个人信息查看</a></li>
-							<li><a href="#"
-							onclick="iframeSet('/studyPlan/studentInfo')">个人信息修改</a></li>
+							onclick="iframeSet('/studyPlan/studentInfo')">个人信息</a></li>
 					</ul></li>
 				<li><img
 					src="<%=request.getContextPath()%>/images/left/plan.jpg" alt="" />计划查询选择
 					<ul>
 						<li><a href="#" target="_self"
-							onclick="iframeSet('/studyPlan/planTypeList')">计划类型列表</a></li>
-						<li><a href="#" target="_self"
-							onclick="iframeSet('/studyPlan/planTypeList')">学习计划列表</a></li>
+							onclick="iframeSet('/studyPlan/planTypeList')">计划选择</a></li>
 
 					</ul></li>
 				<li><img
@@ -76,11 +73,16 @@
 					<ul>
 						<li><a href="#" target="_self"
 							onclick="iframeSet('/studyPlan/punch')">每日打卡</a></li>
+						<li><a href="#" target="_self"
+							onclick="iframeSet('/studyPlan/studentPunchCondition')">查看打卡情况</a></li>
+							
 					</ul></li>
 				<li><img
 					src="<%=request.getContextPath()%>/images/left/coin.jpg" alt="" />计划验收
 					<ul>
-						<li><a href="#" target="_self">查看积分</a></li>
+						<li><a href="#" target="_self" onclick="iframeSet('/studyPlan/submitWork')">计划验收</a></li>
+						<li><a href="#" target="_self" onclick="iframeSet('/studyPlan/studentPlanScore')">查看计划验收积分</a></li>
+						
 					</ul>
 				</li>
 			</ul>

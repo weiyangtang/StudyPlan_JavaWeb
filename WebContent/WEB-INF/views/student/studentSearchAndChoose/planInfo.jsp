@@ -150,7 +150,7 @@
 					if (result > 0)
 						layer.msg("计划选择成功");
 					else
-						layer.msg("已经选过该计划");
+						layer.msg("已经选过该计划,无法重复添加");
 				},
 				error : function() {
 					alert("error");

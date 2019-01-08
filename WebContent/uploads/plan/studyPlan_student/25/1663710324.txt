@@ -1,0 +1,137 @@
+<form class="form-horizontal col-md-6" id="planPublish"
+				enctype="multipart/form-data">
+
+				<fieldset id="">
+					<legend>制定发布学习计划</legend>
+				</fieldset>
+
+				<div class="form-group">
+					<label class="col-md-2 control-label">计划类型:</label>
+					<div class="col-md-4">
+						<select id="planType" name="planType" class="form-control">
+							<option>高数</option>
+							<option>英语</option>
+							<option>计算机科学</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group ">
+					<label class="col-md-2 control-label">计划名称:</label>
+					<div class="col-md-4">
+						<input type="text" class="form-control required" name="planName"
+							placeholder="计划名称不能超过20个汉字" id="planName">
+					</div>
+				</div>
+				<div class="form-group ">
+					<label class="col-md-2 control-label">积分:</label>
+					<div class="col-md-4">
+						<input type="text" class="form-control required" name="credit"
+							placeholder="积分为数字" id="credit">
+					</div>
+				</div>
+				<div class="form-group ">
+					<label class="col-md-2 control-label">开始时间:</label>
+					<div class="col-md-4">
+						<input type="text" class="form-control required" name="startTime"
+							id="startTime" placeholder="开始时间大于等于今日日期"
+							onClick="WdatePicker({skin:'whyGreen',minDate:'%y-%M-{%d}',maxDate:'#F{$dp.$D(\'endTime\')}'})" />
+					</div>
+				</div>
+				<div class="form-group ">
+					<label class="col-md-2 control-label">截止时间:</label>
+					<div class="col-md-4">
+						<input type="text" class="form-control required" name="endTime"
+							id="endTime" placeholder="截止日期大于开始日期"
+							onClick="WdatePicker({minDate:'#F{$dp.$D(\'startTime\')}'})">
+					</div>
+				</div>
+				<div class="form-group ">
+					<label class="col-md-2 control-label">计划内容:</label>
+					<div class="col-md-6">
+						<textarea class="form-control" rows="5" id="planContext"
+							placeholder="请字数控制在50字以内,如有更多信息,请上传文件,详细说明" name="planContext"></textarea>
+					</div>
+				</div>
+				<div class="form-group ">
+					<label class="col-md-2 control-label">文件上传:</label>
+					<div class="col-md-4">
+						<input type="file" name="uploadFile" id="planFile" value="" />
+					</div>
+				</div>
+				<div class="form-group ">
+					<button type="button" onclick="submitForm()"
+						class="btn btn-primary pull-right">提交计划</button>
+				</div>
+			</form>
+
+
+
+
+
+
+
+
+@RequestMapping(value = { "/PlanPublish" }, method = RequestMethod.POST)
+	public @ResponseBody int PlanPublish(HttpSession session, StudyPlan plan,
+			@RequestParam(value = "uploadFile") MultipartFile uploadFile) {
+		
+        System.out.println(plan.getPlanTypeNo()+plan.getPlanContext()+plan.getCoinNum()+plan.getPlanName()+plan.getStartTime()+plan.getEndTime());
+		String teacherNo = (String) session.getAttribute("teacherNo");
+		if (teacherNo == null)
+			return 0;
+		else {
+			plan.setTeacherNo(teacherNo);
+			return planPublishService.planPublish(plan,uploadFile);
+		}
+	}
+
+
+
+
+
+
+
+
+
+/**
+ * 
+ * @功能:文件上传的简单的封装
+ * @注意:不同项目请将地址更改
+ */
+public class FileUploadUtil {
+	private FileUploadUtil() {
+	}
+
+	// 项目的根目录
+	public static String rootPath = System.getProperty("studyPlan.root") + "uploads" + File.separator;
+
+	/**
+	 * @功能:文件上传
+	 * @author tangweiyang
+	 * @param uploadFile
+	 * @return:1成功,0失败
+	 */
+	public static int FileUpload(MultipartFile uploadFile, String filePath) {
+
+		if (uploadFile == null)
+			return 0;
+
+		try {
+			File file = new File(filePath);
+			File fileParent = file.getParentFile();//路径不存在时创建文件夹
+			if (!fileParent.exists()) {
+				fileParent.mkdirs();
+			}
+			FileOutputStream fs = new FileOutputStream(file);
+			fs.write(uploadFile.getBytes());
+			fs.close();
+			System.out.println(filePath);
+		} catch (Exception e) {
+			return 0;
+		}
+
+		return 1;
+	}
+
+}
+

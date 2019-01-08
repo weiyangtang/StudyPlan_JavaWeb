@@ -4,6 +4,30 @@ import java.sql.Date;
 
 public class CheckWork {
 	/**
+	 * @param checkWorkNo
+	 * @param planNo
+	 * @param checkWorkTime
+	 * @param score
+	 * @param studentNo
+	 * @param studentFile
+	 * @param teacherFile
+	 * @param studentName
+	 * @param planName
+	 */
+	public CheckWork(int checkWorkNo, int planNo, Date checkWorkTime, double score, String studentNo,
+			String studentFile, String teacherFile, String studentName, String planName) {
+		super();
+		CheckWorkNo = checkWorkNo;
+		this.planNo = planNo;
+		this.checkWorkTime = checkWorkTime;
+		this.score = score;
+		this.studentNo = studentNo;
+		this.studentFile = studentFile;
+		this.teacherFile = teacherFile;
+		this.studentName = studentName;
+		this.planName = planName;
+	}
+	/**
 	 * 
 	 */
 	public CheckWork() {
@@ -37,6 +61,7 @@ public class CheckWork {
 	private String studentFile;
 	private String teacherFile;
 	private String studentName;
+	private String planName;
 	public int getCheckWorkNo() {
 		return CheckWorkNo;
 	}
@@ -84,6 +109,12 @@ public class CheckWork {
 	}
 	public void setStudentName(String studentName) {
 		this.studentName = studentName;
+	}
+	public String getPlanName() {
+		return planName;
+	}
+	public void setPlanName(String planName) {
+		this.planName = planName;
 	}
 
 }

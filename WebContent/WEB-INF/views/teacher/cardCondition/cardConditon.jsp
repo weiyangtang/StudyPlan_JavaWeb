@@ -138,7 +138,7 @@
 													},{
 
 														field : 'cardNum',
-														title : '打卡次数',
+														title : '打卡时长(小时)',
 														align : 'center',
 														valign : 'center',
 														sortable : true,

@@ -56,8 +56,8 @@
 				<div class="form-group ">
 					<label class="col-md-2 control-label">积分:</label>
 					<div class="col-md-4">
-						<input type="text" class="form-control required" name="credit"
-							placeholder="积分为数字" id="credit">
+						<input type="text" class="form-control required" name="coinNum"
+							placeholder="积分为数字" id="coinNum">
 					</div>
 				</div>
 				<div class="form-group ">
@@ -126,7 +126,7 @@
 		var planContext = $('#planContext').val();
 		var planName = $('#planName').val();
 		var planType = $("#planType")[0].selectedIndex + 1;
-		var credit = $('#credit').val();
+		var credit = $('#coinNum').val();
 		var startTime = new Date($('#startTime').val());
 		var endTime = new Date($('#endTime').val());
 		//var endTime=$('#endTime').val();

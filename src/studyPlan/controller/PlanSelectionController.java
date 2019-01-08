@@ -75,7 +75,7 @@ public class PlanSelectionController {
 	}
 	
 	/**
-	 * @功能:安装计划编号查询学习计划
+	 * @功能:按照计划编号查询学习计划
 	 * 
 	 * */
 	@RequestMapping(value = { "/planInfo" }, method = RequestMethod.POST)
@@ -83,6 +83,9 @@ public class PlanSelectionController {
 		return planSelectionService.findStudyPlanInfo(planNo);
 	}
 	
+	/**
+	 * @功能:学生选择计划
+	 * */
 	@RequestMapping(value = { "/planSelection" }, method = RequestMethod.POST)
 	public @ResponseBody int planSelection(@RequestParam(value = "planNo") String planNo,HttpSession session) {
 		

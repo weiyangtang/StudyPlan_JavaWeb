@@ -1,0 +1,67 @@
+<!-- 模态框（Modal） -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">每日打卡</h4>
+				</div>
+				<div class="container">
+
+					<div id="" class=" col-sm-4">
+						<form id="updateForm">
+							<div class="rows">
+								<label>计划编号:</label> <input type="text" placeholder="计划编号"
+									class="form-control" name="planNo" id="planNo" value="" readonly="readonly">
+							</div>
+							<div class="rows">
+								<label>学生学号:</label> <input type="text" placeholder="学生学号"
+									class="form-control" name="studentNo" id="studentNo" value="" readonly="readonly">
+							</div>
+							<div class="rows">
+								<label>评分:</label>
+								<div class="input-group">
+									<div class="input-icon-group">
+										<div class="input-group" style="width: 100%">
+											<input type="number" class="form-control" placeholder="评分为数字,包括小数"
+												value="" name="score" id="score" />
+										</div>
+									</div>
+									<span class="input-group-btn">
+										<button class="btn btn-primary" type="button">分</button>
+									</span>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">
+						取消</button>
+					<button type="button" onclick="punch();" class="btn btn-primary">确定评分</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+	<!-- end 模态层 -->
+	
+/**
+	 *
+	 * @功能:教师验收
+	 */
+
+	@RequestMapping(value = { "/checkWork" }, method = RequestMethod.POST)
+	public @ResponseBody int checkWork(HttpSession session, @RequestParam(value = "planNo") int planNo,
+			@RequestParam(value = "studentNo") String studentNo, @RequestParam(value = "score") double score) {
+        System.out.println(planNo+"\t"+studentNo+"\t"+score);
+		String teacherNo = (String) session.getAttribute("teacherNo");
+		if (teacherNo == null)
+			return 0;
+
+		return checkWorkService.CheckWork(planNo, studentNo, score);
+	}

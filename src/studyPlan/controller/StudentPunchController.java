@@ -1,6 +1,7 @@
 package studyPlan.controller;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import studyPlan.model.CardCondition;
 import studyPlan.model.PunchCard;
 import studyPlan.service.PunchCardService;
 
@@ -50,4 +52,30 @@ public class StudentPunchController {
 		PunchCard punchCard = new PunchCard(0, pno, studentNo, date, timeLen);
 		return punchCardService.punchCard(punchCard);
 	}
+	/**
+	 * @功能:返回学生打卡页面
+	 * 
+	 * */
+	@RequestMapping(value = { "/studentPunchCondition" }, method = RequestMethod.GET)
+	public  String studentPunchCondition(HttpSession session) {
+		
+		String studentNo = (String) session.getAttribute("studentNo");
+		if (studentNo == null)
+			return null;
+		return "student/cardCondition/cardCondition";
+	}
+	
+	
+	
+	  /**
+     * @功能:返回学生的打卡信息
+     * */
+	@RequestMapping(value = { "/studentPunchCondition" }, method = RequestMethod.POST)
+	public @ResponseBody CardCondition[] studentPunchConditionInfo(HttpSession session) {
+		String studentNo = (String) session.getAttribute("studentNo");
+		if (studentNo == null)
+			return null;
+		return punchCardService.studentPunchCondition(studentNo);
+	}
+	
 }

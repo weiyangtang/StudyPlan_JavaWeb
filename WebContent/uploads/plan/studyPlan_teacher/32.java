@@ -58,9 +58,9 @@ public class CheckWorkController {
 
 	/**
 	 *
-	 * @功能:返回教师验收界面,计划类型
+	 * @功能:返回教师验收界面
 	 */
-	@RequestMapping(value = { "/checkWorkPlanType" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/checkWorkPage" }, method = RequestMethod.GET)
 	public String checkWork(HttpSession session) {
 
 		String teacherNo = (String) session.getAttribute("teacherNo");
@@ -71,25 +71,12 @@ public class CheckWorkController {
 	}
 
 	/**
-	 * @功能:按计划类型返回教师所发布的学习计划视图
-	 */
-	@RequestMapping(value = { "/checkWorkPlanList" }, method = RequestMethod.GET)
-	public String checkWorkPlanList(HttpSession session) {
-
-		String teacherNo = (String) session.getAttribute("teacherNo");
-		if (teacherNo == null)
-			return null;
-		return "teacher/checkWork/planList";
-	}
-
-	/**
 	 * 
 	 * @功能:返回教师所有发布的计划
 	 */
 	@RequestMapping(value = { "/teacherPlanList" }, method = RequestMethod.POST)
-	public @ResponseBody StudyPlan[] teacherPlanList(HttpSession session,
+	public @ResponseBody StudyPlan[] findStudyPlan(HttpSession session,
 			@RequestParam(value = "planTypeNo") String planTypeNo) {
-
 		String teacherNo = (String) session.getAttribute("teacherNo");
 		if (teacherNo == null)
 			return null;
@@ -97,64 +84,17 @@ public class CheckWorkController {
 	}
 
 	/**
-	 * @功能:按计划编号返回提交计划成果的学生
-	 */
-	@RequestMapping(value = { "/AllSubmitStudentList" }, method = RequestMethod.GET)
-	public String AllSubmitStudentList(HttpSession session) {
-
-		String teacherNo = (String) session.getAttribute("teacherNo");
-		if (teacherNo == null)
-			return null;
-		return "teacher/checkWork/checkWorkStudentList";
-	}
-
-	/**
-	 * @功能:按计划编号返回提交计划成果的学生
-	 */
-	@RequestMapping(value = { "/AllSubmitStudentList" }, method = RequestMethod.POST)
-	public @ResponseBody CheckWork[] AllSubmitStudentList(HttpSession session,
-			@RequestParam(value = "planNo") String planNo) {
-		System.out.println("ok");
-		String teacherNo = (String) session.getAttribute("teacherNo");
-		if (teacherNo == null)
-			return null;
-		return checkWorkService.findAllSubmitStudent(planNo);
-	}
-
-	/**
 	 *
 	 * @功能:教师验收
 	 */
+	@RequestMapping(value = { "/submitWork" }, method = RequestMethod.POST)
+	public String checkWork(HttpSession session, @RequestParam String planNO) {
 
-	@RequestMapping(value = { "/checkWork" }, method = RequestMethod.POST)
-	public @ResponseBody int checkWork(HttpSession session, @RequestParam(value = "planNo") int planNo,
-			@RequestParam(value = "studentNo") String studentNo, @RequestParam(value = "score") double score) {
-		System.out.println(planNo + "\t" + studentNo + "\t" + score);
 		String teacherNo = (String) session.getAttribute("teacherNo");
 		if (teacherNo == null)
-			return 0;
-
-		return checkWorkService.CheckWork(planNo, studentNo, score);
-	}
-
-	/**
-	 * @功能:返回学生查询积分信息
-	 */
-	@RequestMapping(value = { "/studentPlanScore" }, method = RequestMethod.GET)
-	public String PersonalSubmitStudent(HttpSession session) {
-		
-		String studentNo = (String) session.getAttribute("studentNo");
-		if (studentNo == null)
 			return null;
-		return "/student/PlanScore/planScore";
-	}
 
-	@RequestMapping(value = { "/studentPlanScore" }, method = RequestMethod.POST)
-	public @ResponseBody CheckWork[] findPersonalSubmitStudent(HttpSession session) {
-		String studentNo = (String) session.getAttribute("studentNo");
-		if (studentNo == null)
-			return null;
-		return checkWorkService.findPersonalSubmitStudent(studentNo);
+		return "teacher/checkWork/planTypeList";
 	}
 
 }

@@ -43,9 +43,10 @@
 	</div>
 	<div class="top_menu">
 		<ul>
-			<li id="first"><a href="#" target="_blank">首页</a></li>
+			<li id="first"><a href="/studyPlan/index.html" target="_blank">首页</a></li>
 			<li><a href="#" onclick="iframeHistory(-1)">后退</a></li>
 			<li><a href="#" onclick="refresh()">刷新</a></li>
+			<li><a href="/studyPlan/exits">退出登录</a></li>
 		</ul>
 	</div>
 	<div class="container">
@@ -57,8 +58,8 @@
 				<li><img
 					src="<%=request.getContextPath()%>/images/left/custom.png" alt="" />个人信息
 					<ul>
-						<li><a href="#" onclick="iframeSet('/studyPlan/teacherInfo')">个人信息查看</a></li>
-						<li><a href="#" onclick="iframeSet('/studyPlan/teacherInfo')">个人信息修改</a></li>
+						<li><a href="#" onclick="iframeSet('/studyPlan/teacherInfo')">个人信息</a></li>
+						
 					</ul></li>
 				<li><img
 					src="<%=request.getContextPath()%>/images/left/plan.jpg" alt="" />计划发布

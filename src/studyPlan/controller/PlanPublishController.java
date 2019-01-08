@@ -42,12 +42,23 @@ public class PlanPublishController {
 	@RequestMapping(value = { "/PlanType" }, method = RequestMethod.POST)
 	public @ResponseBody PlanType[] findAllPlanType(HttpSession session) {
 
-		// session.setAttribute("teacherNo", "1605010203");// 测试,合并删除
-
 		String teacherNo = (String) session.getAttribute("teacherNo");
 		if (teacherNo == null)
 			return null;
 		return planPublishService.findAllPlanType();
+	}
+	
+
+	/**
+	 * @功能:添加计划类型
+	 */
+	@RequestMapping(value = { "/addPlanType" }, method = RequestMethod.POST)
+	public @ResponseBody int addPlanType(HttpSession session,@RequestParam(value="planTypeName") String planTypeName) {
+
+		String teacherNo = (String) session.getAttribute("teacherNo");
+		if (teacherNo == null)
+			return 0;
+		return planPublishService.addPlanType(planTypeName);
 	}
 
 	/**

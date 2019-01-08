@@ -16,10 +16,12 @@
 
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/resources/css/bootstrap.css">
-<script src="<%=request.getContextPath()%>/resources/layer/layer.js" type="text/javascript"></script>
+<script src="<%=request.getContextPath()%>/resources/layer/layer.js"
+	type="text/javascript"></script>
 <script>
 	$(document).ready(function() {
 		personalInfo();
+		findAllMajor();
 	})
 
 	function personalInfo() {
@@ -52,23 +54,48 @@
 					$("#coin")[0].innerHTML = student.coin;
 
 				if (student.headImage != null) {
-					var headImage="<%=request.getContextPath()%>/uploads/headImage/student/"+ student.headImage;
-					$("#header").attr("src",headImage);
-					$("#headerPicture").attr("src",headImage);			
-				}
-				$("#userNames").val(student.studentName.trim());
-				$("#passwords").val(student.studentPassword.trim());
-				$("#coins").val(student.coin);
-				$("#majors").val(student.major);
+					var headImage="<%=request.getContextPath()%>/uploads/headImage/student/"
+									+ student.headImage;
+							$("#header").attr("src", headImage);
+							$("#headerPicture").attr("src", headImage);
+						}
+						$("#userNames").val(student.studentName.trim());
+						$("#passwords").val(student.studentPassword.trim());
+						$("#coins").val(student.coin);
+						$("#majors").val(student.major);
 
-				if (student.studentSex == "女")
-					$("#female").attr("checked", true);//设置radio选中
+						if (student.studentSex == "女")
+							$("#female").attr("checked", true);//设置radio选中
+
+					},
+					error : function() {
+						alert('ERROR!');
+					},
+				});
+	}
+	
+	function findAllMajor() {
+		$.ajax({
+			type : 'post',
+			url : 'findAllMajor',
+			async : false,
+			data : {},
+			success : function(result) {
+
+				var major = result;
+				$("#majors").empty();
+				for ( var i in major)
+					$("#majors").append(
+							"<option value="+i+">"
+									+ major[i].major
+									+ "</option>");
 
 			},
 			error : function() {
-				alert('ERROR!');
-			},
+				alert("error");
+			}
 		});
+
 	}
 
 	function headerPic() {
@@ -94,17 +121,16 @@
 		var sex = $('input[name="sex"]:checked').val();
 		var file = $('#pic')[0].files[0];
 		var majors = $("#majors").val();
-        
+
 		if (userNames == null || userNames == "") {
 			layer.msg("用户名不能为空");
 			return false;
 		} else if (passwords == null || passwords == "") {
 			layer.msg("密码不能为空");
 			return false;
-			}
-		else if (majors == null || majors == "") {
+		} else if (majors == null || majors == "") {
 			layer.msg("专业不为空");
-		}else{
+		} else {
 			var formData = new FormData($('#updateForm')[0]);
 			$.ajax({
 				type : 'post',
@@ -123,19 +149,17 @@
 				}
 			});
 		}
-		
-		
-		
+
 	}
 </script>
 <style>
-   body{
-     padding-top:70px;
-   }
+body {
+	padding-top: 70px;
+}
 </style>
 </head>
 <body>
-	
+
 	<div class="container">
 		<div class="row" style="background: #EEEEEE;">
 			<!-- 左侧 -->
@@ -250,8 +274,12 @@
 									class="form-control" name="passwords" id="passwords" value="">
 							</div>
 							<div class="rows">
-								<label>专业:</label> <input type="text" placeholder="专业"
-									class="form-control" name="majors" id="majors" value="">
+								<label>专业:</label> <select id="majors" name="majors"
+									class="form-control">
+									<option>计算机科学与技术</option>
+									<option>通信工程 </option>
+									<option>电子科学与技术</option>
+								</select>
 							</div>
 							<div class="rows">
 								<label>性别:</label> <input type="radio" name="sex" value="男"

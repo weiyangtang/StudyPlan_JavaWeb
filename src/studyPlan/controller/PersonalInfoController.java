@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import studyPlan.model.Major;
 import studyPlan.model.Student;
 import studyPlan.model.Teacher;
 import studyPlan.service.LoginService;
@@ -47,6 +48,18 @@ public class PersonalInfoController {
 	}
 
 	/**
+	 * @功能:获取所有的专业名
+	 */
+	@RequestMapping(value = { "/findAllMajor" }, method = RequestMethod.POST)
+	public @ResponseBody Major[] findAllMajor(HttpSession session) {
+
+		String studentNo = (String) session.getAttribute("studentNo");
+		if (studentNo == null)
+			return null;
+		return studentService.findAllMajor();
+	}
+
+	/**
 	 * @功能:获取学生的个人信息
 	 * @返回值:返回学生个人信息的JSON格式
 	 * 
@@ -55,7 +68,6 @@ public class PersonalInfoController {
 	public @ResponseBody Student getStudentInfo(HttpSession session) {
 
 		System.out.println("学生端请求数据");
-		// session.setAttribute("studentNo", "1605010203");// 测试,合并删除
 
 		String studentNo = (String) session.getAttribute("studentNo");
 		if (studentNo == null)
@@ -79,10 +91,10 @@ public class PersonalInfoController {
 		if (studentNo == null)
 			return 0;
 		String headImage = "";
-		if (uploadFile == null || uploadFile.getSize() <= 0) {//上传头像为空,即用户不修改头像
+		if (uploadFile == null || uploadFile.getSize() <= 0) {// 上传头像为空,即用户不修改头像
 			Student student = studentService.findStudent(studentNo);
 			headImage = student.getHeadImage();
-		} else {//修改头像
+		} else {// 修改头像
 			String fileExtends = uploadFile.getOriginalFilename()
 					.substring(uploadFile.getOriginalFilename().lastIndexOf(".") + 1);
 			headImage = studentNo + "." + fileExtends;

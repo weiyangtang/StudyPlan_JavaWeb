@@ -35,13 +35,18 @@ public class PlanPublishDao {
 		return list.toArray(new PlanType[0]);
 	}
 
-	/*
-	 * public int planPublish(StudyPlan plan) { String sql =
-	 * "insert studyPlan(planName,planTypeNo,planContext,coinNum,teacherNo) values(?,?,?,?,?)"
-	 * ; int flag = jdbcTemplate.update(sql, plan.getPlanName(),
-	 * plan.getPlanTypeNo(), plan.getPlanContext(), plan.getCoinNum(),
-	 * plan.getTeacherNo()); if (flag > 0) return 1; return 0; }
+	/**
+	 * @功能:添加计划类型
+	 * 
 	 */
+	public int addPlanType(String planTypeName) {
+		String sql = "insert planType(planTypeName) values(?)";
+		int falg = jdbcTemplate.update(sql, planTypeName);
+		if (falg > 0)
+			return 1;
+		else
+			return 0;
+	}
 
 	/**
 	 * @功能:计划发布

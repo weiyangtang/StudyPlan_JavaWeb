@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import studyPlan.dao.StudentDao;
+import studyPlan.model.Major;
 import studyPlan.model.Student;
 
 @Service
@@ -29,6 +30,13 @@ public class StudentService {
 	 */
 	public int updateStudentInfo(Student student) {
 		return dao.updateStudentInfo(student);
+	}
+
+	/**
+	 * @功能:获取专业名称
+	 */
+	public Major[] findAllMajor() {
+		return dao.findAllMajor();
 	}
 
 }

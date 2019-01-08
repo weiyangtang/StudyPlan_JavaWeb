@@ -22,6 +22,14 @@ public class PlanPublishService {
 	public PlanType[] findAllPlanType() {
 		return planPublishDao.findAllPlanType();
 	}
+	
+	/**
+	 * @功能:添加计划类型
+	 * 
+	 */
+	public int addPlanType(String planTypeName) {
+		return planPublishDao.addPlanType(planTypeName);
+	}
 
 	/**
 	 * @功能:教师发布学习计划
